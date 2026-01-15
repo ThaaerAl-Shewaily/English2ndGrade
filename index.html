@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English for Iraq - 2nd Grade | المعلم ثائر الشويلي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@400;700&display=swap');
+
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2C3E50;
+            --light: #F7F9FC;
+            --bubble-bg: #333;
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 { margin: 0; font-size: 1.8rem; }
+        .subtitle { font-size: 0.9rem; opacity: 0.9; margin-top: 5px; }
+
+        /* Navigation Buttons */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            padding: 15px;
+            background: white;
+        }
+
+        .unit-btn {
+            background: var(--light);
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .unit-btn.active, .unit-btn:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(78, 205, 196, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            color: var(--dark);
+            border-right: 5px solid var(--primary);
+            padding-right: 15px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Flashcards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-bottom: 5px solid #eee;
+        }
+
+        .card:active {
+            transform: scale(0.95);
+            border-bottom: 2px solid #eee;
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-word {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .card-type {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Translation Bubble */
+        .bubble {
+            position: absolute;
+            background: var(--bubble-bg);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+
+        .bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--bubble-bg) transparent transparent transparent;
+        }
+
+        .card:hover .bubble { opacity: 1; top: -50px; }
+
+        /* Grammar/Sentence Box */
+        .sentence-box {
+            background: white;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--accent);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sentence-en {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .sentence-ar {
+            color: var(--primary);
+            font-weight: bold;
+            display: none; /* Hidden by default */
+        }
+
+        .speaker-icon {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        .developer {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Animation Classes */
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>English for Iraq - 2nd Grade</h1>
+        <div class="subtitle">المنهج التفاعلي الشامل</div>
+    </header>
+
+    <div class="nav-grid" id="nav-container">
+        </div>
+
+    <main id="main-content">
+        <div style="text-align: center; padding: 50px;">
+            <h2>مرحباً بك يا بطل! 👋</h2>
+            <p>اختر وحدة من القائمة في الأعلى لتبدأ التعلم.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>تم تصميم وتطوير هذا البرنامج بواسطة: <span class="developer">ثائر الشويلي</span></p>
+        <p>© جميع الحقوق محفوظة - منهج الصف الثاني الابتدائي</p>
+    </footer>
+
+    <script>
+        // --- DATA: Complete Curriculum based on File ---
+        const curriculum = [
+            {
+                id: 1,
+                title: "Unit 1: Hello & Toys",
+                icon: "👋",
+                vocab: [
+                    { en: "Robot", ar: "روبوت", icon: "🤖" },
+                    { en: "Kite", ar: "طائرة ورقية", icon: "🪁" },
+                    { en: "Ball", ar: "كرة", icon: "⚽" },
+                    { en: "Bike", ar: "دراجة", icon: "🚲" },
+                    { en: "Book", ar: "كتاب", icon: "📚" },
+                    { en: "Yo-yo", ar: "يويو", icon: "🪀" }
+                ],
+                sentences: [
+                    { en: "Hello, What's your name?", ar: "مرحباً، ما اسمك؟" },
+                    { en: "I'm Zack.", ar: "أنا زاك." },
+                    { en: "How old are you?", ar: "كم عمرك؟" },
+                    { en: "How many books?", ar: "كم عدد الكتب؟" },
+                    { en: "Touch your head.", ar: "المس رأسك." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Unit 2: Food & Cafe",
+                icon: "🍎",
+                vocab: [
+                    { en: "Banana", ar: "موزة", icon: "🍌" },
+                    { en: "Mango", ar: "مانجو", icon: "🥭" },
+                    { en: "Watermelon", ar: "رقي / بطيخ", icon: "🍉" },
+                    { en: "Pizza", ar: "بيتزا", icon: "🍕" },
+                    { en: "Sandwich", ar: "شطيرة", icon: "🥪" },
+                    { en: "Soup", ar: "حساء", icon: "🍲" },
+                    { en: "Tea", ar: "شاي", icon: "☕" }
+                ],
+                sentences: [
+                    { en: "I like bananas.", ar: "أنا أحب الموز." },
+                    { en: "I don't like soup.", ar: "أنا لا أحب الحساء." },
+                    { en: "Do you want a pizza?", ar: "هل تريد بيتزا؟" },
+                    { en: "Yes, please.", ar: "نعم، من فضلك." }
+                ]
+            },
+            {
+                id: 3,
+                title: "Unit 3: My House",
+                icon: "🏠",
+                vocab: [
+                    { en: "Bed", ar: "سرير", icon: "🛏️" },
+                    { en: "Wardrobe", ar: "خزانة ملابس", icon: "🚪" },
+                    { en: "Shelf", ar: "رف", icon: "📚" },
+                    { en: "Kitchen", ar: "مطبخ", icon: "🍳" },
+                    { en: "Bathroom", ar: "حمام", icon: "🛁" },
+                    { en: "Garden", ar: "حديقة", icon: "🌳" }
+                ],
+                sentences: [
+                    { en: "Where is the ball?", ar: "أين الكرة؟" },
+                    { en: "It's on the bed.", ar: "إنها على السرير." },
+                    { en: "It's under the table.", ar: "إنها تحت الطاولة." },
+                    { en: "It's in the bin.", ar: "إنها في سلة المهملات." }
+                ]
+            },
+            {
+                id: 5,
+                title: "Unit 5: Clothes",
+                icon: "👕",
+                vocab: [
+                    { en: "Shirt", ar: "قميص", icon: "👔" },
+                    { en: "Skirt", ar: "تنورة", icon: "👗" },
+                    { en: "Trousers", ar: "بنطلون", icon: "👖" },
+                    { en: "Shoes", ar: "حذاء", icon: "👞" },
+                    { en: "Hat", ar: "قبعة", icon: "🧢" },
+                    { en: "Big", ar: "كبير", icon: "🐘" },
+                    { en: "Small", ar: "صغير", icon: "🐜" }
+                ],
+                sentences: [
+                    { en: "I'm wearing a red shirt.", ar: "أنا أرتدي قميصاً أحمر." },
+                    { en: "He has big shoes.", ar: "هو لديه حذاء كبير." },
+                    { en: "She has a pink dress.", ar: "هي لديها فستان وردي." }
+                ]
+            },
+            {
+                id: 6,
+                title: "Unit 6: My Family",
+                icon: "👨‍👩‍👧‍👦",
+                vocab: [
+                    { en: "Dad", ar: "أب", icon: "👨" },
+                    { en: "Mum", ar: "أم", icon: "👩" },
+                    { en: "Brother", ar: "أخ", icon: "👦" },
+                    { en: "Sister", ar: "أخت", icon: "👧" },
+                    { en: "Grandpa", ar: "جد", icon: "👴" },
+                    { en: "School", ar: "مدرسة", icon: "🏫" }
+                ],
+                sentences: [
+                    { en: "Who is this?", ar: "من هذا؟" },
+                    { en: "This is my brother.", ar: "هذا أخي." },
+                    { en: "Where is mum?", ar: "أين الأم؟" },
+                    { en: "She is in the kitchen.", ar: "هي في المطبخ." }
+                ]
+            },
+            {
+                id: 7,
+                title: "Unit 7: Fun Park",
+                icon: "🎡",
+                vocab: [
+                    { en: "Swing", ar: "أرجوحة", icon: "🌬️" },
+                    { en: "Slide", ar: "زحليقة", icon: "🎢" },
+                    { en: "Happy", ar: "سعيد", icon: "😄" },
+                    { en: "Sad", ar: "حزين", icon: "😢" },
+                    { en: "Hungry", ar: "جائع", icon: "😋" },
+                    { en: "Thirsty", ar: "عطشان", icon: "🥤" }
+                ],
+                sentences: [
+                    { en: "I can swim.", ar: "أنا أستطيع السباحة." },
+                    { en: "I can't fly.", ar: "أنا لا أستطيع الطيران." },
+                    { en: "Are you happy?", ar: "هل أنت سعيد؟" },
+                    { en: "Yes, I am.", ar: "نعم، أنا كذلك." }
+                ]
+            }
+        ];
+
+        // --- Logic ---
+
+        function init() {
+            renderNav();
+        }
+
+        function renderNav() {
+            const container = document.getElementById('nav-container');
+            curriculum.forEach(unit => {
+                const btn = document.createElement('div');
+                btn.className = 'unit-btn';
+                btn.textContent = unit.title;
+                btn.onclick = () => loadUnit(unit);
+                container.appendChild(btn);
+            });
+        }
+
+        function loadUnit(unit) {
+            // Update Active State
+            document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const main = document.getElementById('main-content');
+            main.innerHTML = ''; // Clear current content
+            main.className = 'fade-in';
+
+            // Title
+            const title = document.createElement('h2');
+            title.className = 'section-title';
+            title.textContent = unit.title + " " + unit.icon;
+            main.appendChild(title);
+
+            // Vocab Section
+            if (unit.vocab.length > 0) {
+                const vocabTitle = document.createElement('h3');
+                vocabTitle.textContent = "🔊 Vocabulary (الكلمات)";
+                main.appendChild(vocabTitle);
+
+                const grid = document.createElement('div');
+                grid.className = 'cards-grid';
+
+                unit.vocab.forEach(word => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.onclick = () => speakAndShow(word.en, word.ar);
+                    
+                    card.innerHTML = `
+                        <div class="bubble">${word.ar}</div>
+                        <span class="card-icon">${word.icon}</span>
+                        <div class="card-word">${word.en}</div>
+                        <div class="card-type">اضغط للاستماع</div>
+                    `;
+                    grid.appendChild(card);
+                });
+                main.appendChild(grid);
+            }
+
+            // Sentences Section
+            if (unit.sentences.length > 0) {
+                const sentTitle = document.createElement('h3');
+                sentTitle.textContent = "🗣️ Sentences (الجمل)";
+                sentTitle.style.marginTop = "30px";
+                main.appendChild(sentTitle);
+
+                unit.sentences.forEach(sent => {
+                    const box = document.createElement('div');
+                    box.className = 'sentence-box';
+                    box.onclick = function() {
+                        speakText(sent.en);
+                        // Toggle Arabic
+                        const arText = this.querySelector('.sentence-ar');
+                        arText.style.display = arText.style.display === 'block' ? 'none' : 'block';
+                    };
+
+                    box.innerHTML = `
+                        <div>
+                            <div class="sentence-en">${sent.en}</div>
+                            <div class="sentence-ar">${sent.ar}</div>
+                        </div>
+                        <div class="speaker-icon">🔊</div>
+                    `;
+                    main.appendChild(box);
+                });
+            }
+        }
+
+        // --- Text to Speech & Sound ---
+
+        function speakText(text) {
+            // Stop any current speech
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US'; // English accent
+            utterance.rate = 0.9; // Slower for kids
+            utterance.pitch = 1.1; // Cheerful pitch
+            
+            window.speechSynthesis.speak(utterance);
+            
+            // Simulating a click sound visually or logic
+            playClickEffect();
+        }
+
+        function speakAndShow(text, translation) {
+            speakText(text);
+            // Visual feedback handled by CSS hover/active states
+        }
+
+        function playClickEffect() {
+            // Simple oscillator beep for interaction
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const ctx = new AudioContext();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(400, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.1);
+                    
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.1);
+                }
+            } catch(e) {
+                console.log("Audio not supported");
+            }
+        }
+
+        // Initialize
+        init();
+
+    </script>
+</body>
+</html>
