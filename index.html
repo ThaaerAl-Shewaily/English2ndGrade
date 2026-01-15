@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English for Iraq - 2nd Grade | المعلم ثائر الشويلي</title>
+    <title>English for Iraq - 2nd Grade | المطور ثائر الشويلي</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@400;700&display=swap');
 
@@ -32,7 +32,7 @@
         header {
             background: var(--primary);
             color: white;
-            padding: 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             position: sticky;
@@ -43,31 +43,46 @@
         h1 { margin: 0; font-size: 1.8rem; }
         .subtitle { font-size: 0.9rem; opacity: 0.9; margin-top: 5px; }
 
-        /* Navigation Buttons */
+        /* --- New Navigation Styles (تحديث القائمة) --- */
         .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            padding: 15px;
-            background: white;
+            display: flex;             /* استخدام Flexbox */
+            flex-wrap: wrap;           /* السماح بالنزول لسطر جديد */
+            justify-content: center;   /* توسيط العناصر أفقياً */
+            gap: 15px;                 /* المسافة بين الأزرار */
+            padding: 20px;
+            max-width: 1200px;         /* عرض أقصى للحاوية */
+            margin: 0 auto;            /* توسيط الحاوية في الصفحة */
+            width: 100%;
         }
 
         .unit-btn {
-            background: var(--light);
+            background: white;
             border: 2px solid var(--secondary);
             border-radius: 15px;
-            padding: 10px;
+            padding: 15px 10px;
             cursor: pointer;
             font-weight: bold;
             color: var(--dark);
             text-align: center;
+            font-size: 1.1rem;
+            
+            /* خصائص التجاوب */
+            flex: 1 1 160px;           /* تمدد: نعم، انكماش: نعم، العرض الأساسي: 160 بكسل */
+            max-width: 300px;          /* أقصى عرض للزر حتى لا يصبح عريضاً جداً */
+            
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
         .unit-btn.active, .unit-btn:hover {
             background: var(--secondary);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(78, 205, 196, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(78, 205, 196, 0.4);
+            border-color: var(--secondary);
         }
 
         /* Main Content */
@@ -85,12 +100,16 @@
             padding-right: 15px;
             margin-bottom: 20px;
             font-size: 1.5rem;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         /* Flashcards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 20px;
         }
 
@@ -103,11 +122,16 @@
             position: relative;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-bottom: 5px solid #eee;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .card:hover {
+            border-bottom-color: var(--secondary);
+            transform: translateY(-5px);
         }
 
         .card:active {
             transform: scale(0.95);
-            border-bottom: 2px solid #eee;
         }
 
         .card-icon {
@@ -134,17 +158,18 @@
             position: absolute;
             background: var(--bubble-bg);
             color: white;
-            padding: 5px 10px;
-            border-radius: 8px;
+            padding: 5px 12px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            top: -40px;
+            top: -45px;
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
             z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         .bubble::after {
@@ -152,13 +177,14 @@
             position: absolute;
             top: 100%;
             left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
+            margin-left: -6px;
+            border-width: 6px;
             border-style: solid;
             border-color: var(--bubble-bg) transparent transparent transparent;
         }
 
-        .card:hover .bubble { opacity: 1; top: -50px; }
+        .card:hover .bubble { opacity: 1; top: -55px; }
+        .card:active .bubble { opacity: 1; top: -55px; } /* For touch devices */
 
         /* Grammar/Sentence Box */
         .sentence-box {
@@ -166,28 +192,38 @@
             margin-bottom: 15px;
             padding: 20px;
             border-radius: 15px;
-            border-left: 5px solid var(--accent);
+            border-left: 6px solid var(--accent);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+        }
+        
+        .sentence-box:hover {
+            background: #fffcf0;
         }
 
         .sentence-en {
             font-family: 'Fredoka', sans-serif;
             font-size: 1.3rem;
             color: var(--dark);
+            margin-bottom: 5px;
         }
 
         .sentence-ar {
             color: var(--primary);
             font-weight: bold;
             display: none; /* Hidden by default */
+            font-size: 1.1rem;
         }
 
         .speaker-icon {
             font-size: 1.5rem;
             color: var(--secondary);
+            background: #eefbfb;
+            padding: 10px;
+            border-radius: 50%;
         }
 
         /* Footer */
@@ -195,18 +231,28 @@
             background: var(--dark);
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             margin-top: auto;
         }
 
         .developer {
             color: var(--accent);
             font-weight: bold;
+            font-size: 1.1rem;
         }
 
         /* Animation Classes */
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            .nav-grid { padding: 10px; gap: 10px; }
+            .unit-btn { padding: 12px; font-size: 1rem; }
+            .card-icon { font-size: 3rem; }
+            .sentence-en { font-size: 1.1rem; }
+        }
 
     </style>
 </head>
@@ -221,19 +267,24 @@
         </div>
 
     <main id="main-content">
-        <div style="text-align: center; padding: 50px;">
-            <h2>مرحباً بك يا بطل! 👋</h2>
-            <p>اختر وحدة من القائمة في الأعلى لتبدأ التعلم.</p>
+        <div style="text-align: center; padding: 40px 20px; background: white; border-radius: 20px; margin-top: 20px;">
+            <h2 style="color: var(--primary);">مرحباً بك يا بطل! 👋</h2>
+            <p style="font-size: 1.2rem; line-height: 1.6;">
+                اختر الوحدة الدراسية من القائمة في الأعلى.<br>
+                اضغط على الصور لسماع الكلمات، واضغط على الجمل لمعرفة معناها.
+            </p>
+            <div style="font-size: 4rem; margin-top: 20px;">🎒</div>
         </div>
     </main>
 
     <footer>
-        <p>تم تصميم وتطوير هذا البرنامج بواسطة: <span class="developer">ثائر الشويلي</span></p>
-        <p>© جميع الحقوق محفوظة - منهج الصف الثاني الابتدائي</p>
+        <p>تم تصميم وتطوير هذا البرنامج بواسطة</p>
+        <p class="developer">ثائر الشويلي</p>
+        <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">© 2026 جميع الحقوق محفوظة</p>
     </footer>
 
     <script>
-        // --- DATA: Complete Curriculum based on File ---
+        // --- DATA ---
         const curriculum = [
             {
                 id: 1,
@@ -364,7 +415,10 @@
             curriculum.forEach(unit => {
                 const btn = document.createElement('div');
                 btn.className = 'unit-btn';
-                btn.textContent = unit.title;
+                btn.innerHTML = `
+                    <span style="font-size:1.5rem; display:block; margin-bottom:5px;">${unit.icon}</span>
+                    ${unit.title}
+                `;
                 btn.onclick = () => loadUnit(unit);
                 container.appendChild(btn);
             });
@@ -376,19 +430,24 @@
             event.currentTarget.classList.add('active');
 
             const main = document.getElementById('main-content');
+            // Remove Fade In Class to restart animation
+            main.classList.remove('fade-in');
+            void main.offsetWidth; // trigger reflow
+            
             main.innerHTML = ''; // Clear current content
-            main.className = 'fade-in';
+            main.classList.add('fade-in');
 
             // Title
             const title = document.createElement('h2');
             title.className = 'section-title';
-            title.textContent = unit.title + " " + unit.icon;
+            title.textContent = unit.title;
             main.appendChild(title);
 
             // Vocab Section
             if (unit.vocab.length > 0) {
                 const vocabTitle = document.createElement('h3');
                 vocabTitle.textContent = "🔊 Vocabulary (الكلمات)";
+                vocabTitle.style.color = "var(--dark)";
                 main.appendChild(vocabTitle);
 
                 const grid = document.createElement('div');
@@ -414,7 +473,8 @@
             if (unit.sentences.length > 0) {
                 const sentTitle = document.createElement('h3');
                 sentTitle.textContent = "🗣️ Sentences (الجمل)";
-                sentTitle.style.marginTop = "30px";
+                sentTitle.style.marginTop = "40px";
+                sentTitle.style.color = "var(--dark)";
                 main.appendChild(sentTitle);
 
                 unit.sentences.forEach(sent => {
@@ -424,11 +484,16 @@
                         speakText(sent.en);
                         // Toggle Arabic
                         const arText = this.querySelector('.sentence-ar');
-                        arText.style.display = arText.style.display === 'block' ? 'none' : 'block';
+                        if (arText.style.display === 'block') {
+                            arText.style.display = 'none';
+                        } else {
+                            arText.style.display = 'block';
+                            arText.classList.add('fade-in');
+                        }
                     };
 
                     box.innerHTML = `
-                        <div>
+                        <div style="flex:1;">
                             <div class="sentence-en">${sent.en}</div>
                             <div class="sentence-ar">${sent.ar}</div>
                         </div>
@@ -437,32 +502,31 @@
                     main.appendChild(box);
                 });
             }
+            
+            // Scroll slightly to content
+            const scrollTarget = main.getBoundingClientRect().top + window.scrollY - 100;
+            window.scrollTo({top: scrollTarget, behavior: 'smooth'});
         }
 
         // --- Text to Speech & Sound ---
 
         function speakText(text) {
-            // Stop any current speech
             window.speechSynthesis.cancel();
             
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US'; // English accent
-            utterance.rate = 0.9; // Slower for kids
-            utterance.pitch = 1.1; // Cheerful pitch
+            utterance.lang = 'en-US';
+            utterance.rate = 0.8; // Slightly slower
+            utterance.pitch = 1.1;
             
             window.speechSynthesis.speak(utterance);
-            
-            // Simulating a click sound visually or logic
             playClickEffect();
         }
 
         function speakAndShow(text, translation) {
             speakText(text);
-            // Visual feedback handled by CSS hover/active states
         }
 
         function playClickEffect() {
-            // Simple oscillator beep for interaction
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 if (AudioContext) {
@@ -471,10 +535,10 @@
                     const gain = ctx.createGain();
                     
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(400, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.1);
+                    osc.frequency.setValueAtTime(500, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.1);
                     
-                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.05, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
                     
                     osc.connect(gain);
@@ -482,9 +546,7 @@
                     osc.start();
                     osc.stop(ctx.currentTime + 0.1);
                 }
-            } catch(e) {
-                console.log("Audio not supported");
-            }
+            } catch(e) { }
         }
 
         // Initialize
