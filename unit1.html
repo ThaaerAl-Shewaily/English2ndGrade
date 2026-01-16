@@ -545,23 +545,42 @@
         }
 
         // --- Text to Speech (English) ---
-        let currentUtterance = null;
         function speak(text) {
-            const toast = document.getElementById('toast');
-            toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1500);
+    // 1. إيقاف أي صوت سابق فوراً لتجنب التداخل
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+    }
 
-            window.speechSynthesis.cancel();
-            currentUtterance = new SpeechSynthesisUtterance(text);
-            currentUtterance.lang = 'en-US'; 
-            currentUtterance.rate = 0.85; 
-            currentUtterance.pitch = 1.1;
+    // 2. إنشاء كائن الصوت وربطه بالمتغير العام
+    currentUtterance = new SpeechSynthesisUtterance(text);
 
-            let voices = window.speechSynthesis.getVoices();
-            let enVoice = voices.find(v => v.lang.includes('en'));
-            if(enVoice) currentUtterance.voice = enVoice;
-            
-            window.speechSynthesis.speak(currentUtterance);
-        }
+    // 3. إعدادات اللغة والنبرة
+    currentUtterance.lang = 'en-US'; 
+    currentUtterance.rate = 0.8;  // سرعة أبطأ قليلاً مناسبة للأطفال
+    currentUtterance.pitch = 1.1; // نبرة مرحة
+    currentUtterance.volume = 1.0; // أعلى صوت
+
+    // 4. محاولة العثور على صوت إنجليزي داخل الهاتف
+    // هواتف أندرويد أحياناً تختار صوتاً افتراضياً صامتاً، لذا نبحث يدوياً
+    let voices = window.speechSynthesis.getVoices();
+    let englishVoice = voices.find(v => v.lang.includes('en-US') || v.lang.includes('en-GB'));
+    
+    if (englishVoice) {
+        currentUtterance.voice = englishVoice;
+    }
+
+    // 5. حل مشكلة توقف الصوت في بعض متصفحات كروم
+    currentUtterance.onend = function() { currentUtterance = null; };
+    currentUtterance.onerror = function(e) { console.error('Audio Error:', e); };
+
+    // 6. تشغيل الصوت
+    window.speechSynthesis.speak(currentUtterance);
+}
+
+// ضروري جداً للأندرويد: تحميل الأصوات عند فتح الصفحة
+window.speechSynthesis.onvoiceschanged = function() {
+    window.speechSynthesis.getVoices();
+};
         window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
     </script>
 
