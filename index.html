@@ -3,579 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English for Iraq - 2nd Grade | </title>
+    <title>English for Iraq | أ. ثائر الشويلي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
 
         :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --accent: #FFE66D;
-            --dark: #2C3E50;
-            --light: #F7F9FC;
-            --white: #ffffff;
+            --bg-color: #f0f2f5;
+            --text-color: #2d3436;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s ease; }
-        
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+
         body {
             font-family: 'Tajawal', sans-serif;
-            background: var(--light);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
-            padding: 0;
+            padding: 20px;
             min-height: 100vh;
-            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* --- Header --- */
-        header {
-            background: linear-gradient(135deg, var(--primary), #ff8e8e);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-
-        h1 { margin: 0; font-size: 1.8rem; text-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
-        .subtitle { font-size: 0.9rem; opacity: 0.95; margin-top: 5px; font-weight: bold; }
-
-        /* --- Main Layout --- */
         .container {
+            width: 100%;
             max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 15px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
-        /* --- Unit Grid (Home Page) --- */
-        .grid-menu {
+        header { margin-bottom: 40px; }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 0;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        /* Grid Layout */
+        .units-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            padding: 20px 0;
+            padding: 10px;
         }
 
+        /* Unit Card Style */
         .unit-card {
-            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            cursor: pointer;
-            border: 3px solid transparent;
+            padding: 25px 15px;
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(0);
         }
 
         .unit-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--secondary);
-            box-shadow: 0 15px 35px rgba(78, 205, 196, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
-        .unit-card.revision {
-            border-color: var(--accent);
-            background: #fffdf0;
-        }
+        /* Gradients for each unit */
+        .u1 { background: linear-gradient(45deg, #FF512F, #DD2476); }
+        .u2 { background: linear-gradient(45deg, #FF9966, #FF5E62); }
+        .u3 { background: linear-gradient(45deg, #11998e, #38ef7d); }
+        .u4 { background: linear-gradient(45deg, #8E2DE2, #4A00E0); } /* Review */
+        .u5 { background: linear-gradient(45deg, #EA384D, #D31027); }
+        .u6 { background: linear-gradient(45deg, #1FA2FF, #12D8FA, #A6FFCB); color: #0f4c75; }
+        .u7 { background: linear-gradient(45deg, #fc4a1a, #f7b733); }
+        .u8 { background: linear-gradient(45deg, #FDC830, #F37335); } /* Review */
 
-        .card-header {
-            padding: 20px;
-            text-align: center;
-            background: #f8f9fa;
-            border-bottom: 2px solid #eee;
-        }
+        .card-icon { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+        .card-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 5px; }
+        .card-desc { font-size: 0.9rem; opacity: 0.9; font-weight: normal; font-family: 'Fredoka', sans-serif; }
 
-        .card-icon { font-size: 4rem; display: block; margin-bottom: 10px; }
-        .card-title { font-weight: 900; font-size: 1.4rem; color: var(--dark); }
-        .card-desc { color: #666; font-size: 0.9rem; margin-top: 5px; }
-
-        .card-body { padding: 15px; }
-        .topic-tag { 
-            display: inline-block; 
-            background: #eee; 
-            padding: 5px 10px; 
-            border-radius: 15px; 
-            font-size: 0.8rem; 
-            margin: 3px; 
-            color: #555;
-        }
-
-        /* --- Detailed Unit Page (Hidden by default) --- */
-        #unit-detail-view {
-            display: none; /* Hidden initially */
-            background: white;
-            border-radius: 30px;
-            min-height: 80vh;
-            padding: 30px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.05);
-        }
-
-        .back-btn {
-            background: var(--dark);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .back-btn:hover { background: #1a252f; transform: scale(1.05); }
-
-        .detail-header { text-align: center; margin-bottom: 40px; border-bottom: 2px dashed #eee; padding-bottom: 20px; }
-        .detail-title { font-size: 2.5rem; color: var(--primary); margin: 0; }
-        
-        /* Sections inside Unit */
-        .section-block { margin-bottom: 50px; }
-        .section-head { 
-            font-size: 1.5rem; 
-            color: var(--secondary); 
-            margin-bottom: 20px; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-        }
-
-        /* Vocab Grid */
-        .vocab-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-        }
-
-        .vocab-item {
-            background: #fff;
-            border: 2px solid #eee;
+        .revision-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 10px;
             border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
-        .vocab-item:hover { border-color: var(--primary); background: #fff5f5; }
-        .vocab-icon { font-size: 3rem; margin-bottom: 10px; display: block; }
-        .vocab-word { font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--dark); }
-        .vocab-ar { font-size: 0.9rem; color: #888; margin-top: 5px; }
-
-        /* Sentence Rows */
-        .sentence-row {
-            background: #f8f9fa;
-            border-left: 5px solid var(--accent);
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .sentence-row:hover { background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .en-text { font-family: 'Fredoka', sans-serif; font-size: 1.3rem; font-weight: 500; }
-        .ar-text { color: var(--primary); font-weight: bold; font-size: 1.1rem; display: none; margin-top: 5px; }
-        .speaker-btn { background: var(--secondary); color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
         /* Footer */
         footer {
-            text-align: center;
-            padding: 30px;
-            background: var(--dark);
-            color: white;
             margin-top: 50px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            color: #95a5a6;
         }
-        .dev-name { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
 
-        /* Animation */
-        .fade-in { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        footer strong { color: #2c3e50; }
 
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 20px; width: 95%; }
+            h1 { font-size: 1.8rem; }
+            .units-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .unit-card { padding: 15px; }
+            .card-icon { font-size: 2.5rem; }
+            .card-title { font-size: 1.1rem; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>English for Iraq - 2nd Grade</h1>
-        <div class="subtitle">المنهج التفاعلي الكامل لجميع الوحدات</div>
-    </header>
-
     <div class="container">
-        
-        <div id="main-menu" class="fade-in">
-            <h2 style="text-align: center; color: var(--dark);">اختر الوحدة الدراسية</h2>
-            <div class="grid-menu" id="units-container">
-                </div>
-        </div>
+        <header>
+            <h1>English for Iraq</h1>
+            <p class="subtitle">المنهج التفاعلي للصف الثاني الابتدائي</p>
+        </header>
 
-        <div id="unit-detail-view">
-            <button class="back-btn" onclick="showMainMenu()">➜ العودة للقائمة</button>
+        <div class="units-grid">
             
-            <div id="unit-content-area">
-                </div>
+            <a href="unit1.html" class="unit-card u1">
+                <span class="card-icon">👋</span>
+                <span class="card-title">Unit 1</span>
+                <span class="card-desc">Hello & Toys</span>
+            </a>
+
+            <a href="unit2.html" class="unit-card u2">
+                <span class="card-icon">🍕</span>
+                <span class="card-title">Unit 2</span>
+                <span class="card-desc">Food & Cafe</span>
+            </a>
+
+            <a href="unit3.html" class="unit-card u3">
+                <span class="card-icon">🏠</span>
+                <span class="card-title">Unit 3</span>
+                <span class="card-desc">My House</span>
+            </a>
+
+            <a href="unit4.html" class="unit-card u4">
+                <div class="revision-badge">مراجعة</div>
+                <span class="card-icon">🔄</span>
+                <span class="card-title">Unit 4</span>
+                <span class="card-desc">Revision 1</span>
+            </a>
+
+            <a href="unit5.html" class="unit-card u5">
+                <span class="card-icon">👗</span>
+                <span class="card-title">Unit 5</span>
+                <span class="card-desc">Clothes</span>
+            </a>
+
+            <a href="unit6.html" class="unit-card u6">
+                <span class="card-icon">👨‍👩‍👧</span>
+                <span class="card-title">Unit 6</span>
+                <span class="card-desc">My Family</span>
+            </a>
+
+            <a href="unit7.html" class="unit-card u7">
+                <span class="card-icon">🎡</span>
+                <span class="card-title">Unit 7</span>
+                <span class="card-desc">Fun Park</span>
+            </a>
+
+            <a href="unit8.html" class="unit-card u8">
+                <div class="revision-badge">نهائي</div>
+                <span class="card-icon">🏆</span>
+                <span class="card-title">Unit 8</span>
+                <span class="card-desc">Final Revision</span>
+            </a>
+
         </div>
 
+        <footer>
+            <p>تصميم وبرمجة: <strong>ثائر الشويلي</strong></p>
+            <p style="font-size: 0.8rem;">© 2026 جميع الحقوق محفوظة</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>تم التصميم والبرمجة بواسطة </p>
-        <p class="dev-name">ثائر الشويلي</p>
-        <p>© 2026 جميع الحقوق محفوظة</p>
-    </footer>
-
-    <script>
-        // --- THE DATABASE (قاعدة البيانات الشاملة) ---
-        const unitsDB = [
-            {
-                id: 1,
-                title: "Unit 1: Hello & Toys",
-                desc: "التحية، الأسماء، الأرقام، ومتجر الألعاب",
-                icon: "👋",
-                topics: ["Greetings", "Names", "Numbers 1-5", "Toys", "Colors"],
-                vocab: [
-                    { en: "Robot", ar: "روبوت (آلي)", icon: "🤖" },
-                    { en: "Kite", ar: "طائرة ورقية", icon: "🪁" },
-                    { en: "Ball", ar: "كرة", icon: "⚽" },
-                    { en: "Bike", ar: "دراجة", icon: "🚲" },
-                    { en: "Yo-yo", ar: "يويو", icon: "🪀" },
-                    { en: "Red", ar: "أحمر", icon: "🔴" },
-                    { en: "Blue", ar: "أزرق", icon: "🔵" },
-                    { en: "Green", ar: "أخضر", icon: "🟢" },
-                    { en: "Yellow", ar: "أصفر", icon: "🟡" },
-                    { en: "Pink", ar: "وردي", icon: "🌸" }
-                ],
-                sentences: [
-                    { en: "Hello, What is your name?", ar: "مرحباً، ما اسمك؟" },
-                    { en: "I am Zack.", ar: "أنا زاك." },
-                    { en: "I am Hadi.", ar: "أنا هادي." },
-                    { en: "How old are you?", ar: "كم عمرك؟" },
-                    { en: "I am seven.", ar: "عمري سبع سنوات." },
-                    { en: "How many books?", ar: "كم عدد الكتب؟" },
-                    { en: "One, two, three, four, five.", ar: "واحد، اثنان، ثلاثة، أربعة، خمسة." },
-                    { en: "Goodbye.", ar: "إلى اللقاء." }
-                ]
-            },
-            {
-                id: 2,
-                title: "Unit 2: Food & The Cafe",
-                desc: "الفواكه، المأكولات، المقهى، وما نحب",
-                icon: "🍕",
-                topics: ["Fruits", "Cafe Menu", "I like / I don't like"],
-                vocab: [
-                    { en: "Banana", ar: "موزة", icon: "🍌" },
-                    { en: "Mango", ar: "مانجو", icon: "🥭" },
-                    { en: "Grapes", ar: "عنب", icon: "🍇" },
-                    { en: "Dates", ar: "تمر", icon: "🌴" },
-                    { en: "Watermelon", ar: "رقي / بطيخ", icon: "🍉" },
-                    { en: "Pizza", ar: "بيتزا", icon: "🍕" },
-                    { en: "Soup", ar: "حساء", icon: "🍲" },
-                    { en: "Sandwich", ar: "شطيرة", icon: "🥪" },
-                    { en: "Tea", ar: "شاي", icon: "☕" },
-                    { en: "Milk", ar: "حليب", icon: "🥛" }
-                ],
-                sentences: [
-                    { en: "I like mangoes.", ar: "أنا أحب المانجو." },
-                    { en: "I don't like soup.", ar: "أنا لا أحب الحساء." },
-                    { en: "Do you want a sandwich?", ar: "هل تريد شطيرة؟" },
-                    { en: "Yes, please.", ar: "نعم، من فضلك." },
-                    { en: "Here you are.", ar: "تفضل (خذ هذا)." },
-                    { en: "Thank you.", ar: "شكراً لك." }
-                ]
-            },
-            {
-                id: 3,
-                title: "Unit 3: My House",
-                desc: "أجزاء المنزل، غرفة النوم، وحروف الجر",
-                icon: "🏠",
-                topics: ["Bedroom", "House Rooms", "Prepositions (In/On/Under)"],
-                vocab: [
-                    { en: "Bed", ar: "سرير", icon: "🛏️" },
-                    { en: "Wardrobe", ar: "خزانة ملابس", icon: "🚪" },
-                    { en: "Shelf", ar: "رف", icon: "📚" },
-                    { en: "Bin", ar: "سلة مهملات", icon: "🗑️" },
-                    { en: "Kitchen", ar: "مطبخ", icon: "🍳" },
-                    { en: "Bathroom", ar: "حمام", icon: "🛁" },
-                    { en: "Sitting room", ar: "غرفة الجلوس", icon: "🛋️" },
-                    { en: "Garden", ar: "حديقة", icon: "🌳" }
-                ],
-                sentences: [
-                    { en: "Where is the ball?", ar: "أين الكرة؟" },
-                    { en: "It is on the bed.", ar: "إنها على السرير." },
-                    { en: "It is in the bin.", ar: "إنها في سلة المهملات." },
-                    { en: "It is under the table.", ar: "إنها تحت الطاولة." },
-                    { en: "Where is Deena?", ar: "أين دينا؟" },
-                    { en: "She is in the kitchen.", ar: "هي في المطبخ." }
-                ]
-            },
-            {
-                id: 4,
-                title: "Unit 4: Revision (مراجعة)",
-                desc: "مراجعة شاملة للوحدات 1، 2، 3",
-                icon: "🔄",
-                isRevision: true,
-                topics: ["Toys Review", "Food Review", "House Review", "Story: The Mouse"],
-                vocab: [
-                    { en: "Mouse", ar: "فأر", icon: "🐭" },
-                    { en: "Bread", ar: "خبز", icon: "🍞" },
-                    { en: "Key", ar: "مفتاح", icon: "🔑" },
-                    { en: "Snake", ar: "أفعى", icon: "🐍" },
-                    { en: "Cake", ar: "كعكة", icon: "🍰" },
-                    { en: "Egg", ar: "بيضة", icon: "🥚" }
-                ],
-                sentences: [
-                    { en: "What is this?", ar: "ما هذا؟" },
-                    { en: "It is a robot.", ar: "إنه روبوت." },
-                    { en: "Is it a ball?", ar: "هل هذه كرة؟" },
-                    { en: "No, it is a yo-yo.", ar: "لا، إنه يويو." },
-                    { en: "I am hungry.", ar: "أنا جائع." },
-                    { en: "I want a pizza.", ar: "أريد بيتزا." }
-                ]
-            },
-            {
-                id: 5,
-                title: "Unit 5: Clothes",
-                desc: "الملابس، الأحجام، والألوان",
-                icon: "👕",
-                topics: ["Clothes names", "Colors", "Big / Small", "Long / Short"],
-                vocab: [
-                    { en: "Shirt", ar: "قميص", icon: "👔" },
-                    { en: "Trousers", ar: "بنطلون", icon: "👖" },
-                    { en: "Skirt", ar: "تنورة", icon: "👗" },
-                    { en: "Dress", ar: "فستان", icon: "👚" },
-                    { en: "Shoes", ar: "حذاء", icon: "👞" },
-                    { en: "Trainers", ar: "حذاء رياضي", icon: "👟" },
-                    { en: "Hat", ar: "قبعة", icon: "🧢" },
-                    { en: "Socks", ar: "جوارب", icon: "🧦" }
-                ],
-                sentences: [
-                    { en: "I am wearing red trousers.", ar: "أنا أرتدي بنطلوناً أحمر." },
-                    { en: "He is wearing a blue shirt.", ar: "هو يرتدي قميصاً أزرق." },
-                    { en: "This is a big hat.", ar: "هذه قبعة كبيرة." },
-                    { en: "These are small shoes.", ar: "هذا حذاء صغير." },
-                    { en: "It is long.", ar: "إنه طويل." },
-                    { en: "It is short.", ar: "إنه قصير." }
-                ]
-            },
-            {
-                id: 6,
-                title: "Unit 6: My Family",
-                desc: "أفراد العائلة والأماكن",
-                icon: "👨‍👩‍👧‍👦",
-                topics: ["Family Members", "Who is this?", "Places (School/Market)"],
-                vocab: [
-                    { en: "Dad", ar: "أب", icon: "👨" },
-                    { en: "Mum", ar: "أم", icon: "👩" },
-                    { en: "Grandpa", ar: "جد", icon: "👴" },
-                    { en: "Grandma", ar: "جدة", icon: "👵" },
-                    { en: "Brother", ar: "أخ", icon: "👦" },
-                    { en: "Sister", ar: "أخت", icon: "👧" },
-                    { en: "Baby", ar: "طفل رضيع", icon: "👶" },
-                    { en: "School", ar: "مدرسة", icon: "🏫" }
-                ],
-                sentences: [
-                    { en: "Who is this?", ar: "من هذا؟" },
-                    { en: "This is my brother.", ar: "هذا أخي." },
-                    { en: "Where is Mum?", ar: "أين الأم؟" },
-                    { en: "She is in the kitchen.", ar: "هي في المطبخ." },
-                    { en: "Where is Dad?", ar: "أين الأب؟" },
-                    { en: "He is in the garden.", ar: "هو في الحديقة." }
-                ]
-            },
-            {
-                id: 7,
-                title: "Unit 7: Fun Park",
-                desc: "مدينة الألعاب، المشاعر، والقدرات",
-                icon: "🎡",
-                topics: ["Fun Park Rides", "Feelings", "Can / Can't"],
-                vocab: [
-                    { en: "Big wheel", ar: "دولاب الهواء", icon: "🎡" },
-                    { en: "Swing", ar: "أرجوحة", icon: "🌬️" },
-                    { en: "Slide", ar: "زحليقة", icon: "🎢" },
-                    { en: "Happy", ar: "سعيد", icon: "😄" },
-                    { en: "Sad", ar: "حزين", icon: "😢" },
-                    { en: "Hungry", ar: "جائع", icon: "😋" },
-                    { en: "Thirsty", ar: "عطشان", icon: "🥤" },
-                    { en: "Swim", ar: "يسبح", icon: "🏊" }
-                ],
-                sentences: [
-                    { en: "I like the swing.", ar: "أنا أحب الأرجوحة." },
-                    { en: "Are you happy?", ar: "هل أنت سعيد؟" },
-                    { en: "Yes, I am.", ar: "نعم، أنا كذلك." },
-                    { en: "Are you sad?", ar: "هل أنت حزين؟" },
-                    { en: "No, I am thirsty.", ar: "لا، أنا عطشان." },
-                    { en: "I can swim.", ar: "أنا أستطيع السباحة." },
-                    { en: "I can't fly.", ar: "أنا لا أستطيع الطيران." }
-                ]
-            },
-            {
-                id: 8,
-                title: "Unit 8: Revision (مراجعة)",
-                desc: "مراجعة شاملة للوحدات 5، 6، 7",
-                icon: "✨",
-                isRevision: true,
-                topics: ["Clothes Review", "Family Review", "Feelings Review", "Goodbye Song"],
-                vocab: [
-                    { en: "Sun", ar: "شمس", icon: "☀️" },
-                    { en: "Moon", ar: "قمر", icon: "🌙" },
-                    { en: "Van", ar: "سيارة نقل", icon: "🚐" },
-                    { en: "Watch", ar: "ساعة يد", icon: "⌚" },
-                    { en: "Orange", ar: "برتقال/برتقالي", icon: "🍊" },
-                    { en: "Umbrella", ar: "مظلة", icon: "☂️" }
-                ],
-                sentences: [
-                    { en: "Who is in the van?", ar: "من في السيارة؟" },
-                    { en: "My dad and my brother.", ar: "أبي وأخي." },
-                    { en: "What color is the shirt?", ar: "ما لون القميص؟" },
-                    { en: "It is green.", ar: "إنه أخضر." },
-                    { en: "I am happy. Goodbye.", ar: "أنا سعيد. مع السلامة." }
-                ]
-            }
-        ];
-
-        // --- CORE FUNCTIONS (منطق البرنامج) ---
-
-        function init() {
-            renderMenu();
-        }
-
-        // رسم القائمة الرئيسية
-        function renderMenu() {
-            const container = document.getElementById('units-container');
-            container.innerHTML = '';
-
-            unitsDB.forEach(unit => {
-                const card = document.createElement('div');
-                card.className = `unit-card ${unit.isRevision ? 'revision' : ''}`;
-                card.onclick = () => openUnit(unit.id);
-
-                const tags = unit.topics.map(t => `<span class="topic-tag">${t}</span>`).join('');
-
-                card.innerHTML = `
-                    <div class="card-header">
-                        <span class="card-icon">${unit.icon}</span>
-                        <div class="card-title">${unit.title}</div>
-                        <div class="card-desc">${unit.desc}</div>
-                    </div>
-                    <div class="card-body">
-                        ${tags}
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // فتح وحدة معينة
-        function openUnit(id) {
-            const unit = unitsDB.find(u => u.id === id);
-            if (!unit) return;
-
-            // Hide Menu, Show Detail
-            document.getElementById('main-menu').style.display = 'none';
-            const detailView = document.getElementById('unit-detail-view');
-            detailView.style.display = 'block';
-            detailView.classList.add('fade-in');
-
-            // Scroll to top
-            window.scrollTo(0, 0);
-
-            // Populate Content
-            const contentArea = document.getElementById('unit-content-area');
-            
-            // 1. Header
-            let html = `
-                <div class="detail-header">
-                    <div style="font-size:4rem;">${unit.icon}</div>
-                    <h2 class="detail-title">${unit.title}</h2>
-                    <p>${unit.desc}</p>
-                </div>
-            `;
-
-            // 2. Vocabulary Section
-            if(unit.vocab.length > 0) {
-                html += `
-                    <div class="section-block">
-                        <div class="section-head">
-                            <span>🔊</span> Vocabulary (الكلمات الجديدة)
-                        </div>
-                        <div class="vocab-grid">
-                            ${unit.vocab.map(item => `
-                                <div class="vocab-item" onclick="speak('${item.en}')">
-                                    <span class="vocab-icon">${item.icon}</span>
-                                    <div class="vocab-word">${item.en}</div>
-                                    <div class="vocab-ar">${item.ar}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-
-            // 3. Sentences Section
-            if(unit.sentences.length > 0) {
-                html += `
-                    <div class="section-block">
-                        <div class="section-head">
-                            <span>🗣️</span> Conversation & Grammar (جمل و قواعد)
-                        </div>
-                        <div class="sentences-list">
-                            ${unit.sentences.map((sent, index) => `
-                                <div class="sentence-row" onclick="toggleTranslation(this, '${sent.en.replace(/'/g, "\\'")}')">
-                                    <div style="flex:1">
-                                        <div class="en-text">${sent.en}</div>
-                                        <div class="ar-text" id="trans-${index}">${sent.ar}</div>
-                                    </div>
-                                    <div class="speaker-btn">🔊</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-
-            contentArea.innerHTML = html;
-        }
-
-        // العودة للقائمة الرئيسية
-        function showMainMenu() {
-            document.getElementById('unit-detail-view').style.display = 'none';
-            document.getElementById('main-menu').style.display = 'block';
-            document.getElementById('main-menu').classList.add('fade-in');
-            window.scrollTo(0, 0);
-        }
-
-        // --- AUDIO & INTERACTION ---
-
-        function speak(text) {
-            window.speechSynthesis.cancel(); // Stop previous
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.85; // سرعة مناسبة للأطفال
-            utterance.pitch = 1.1;
-            window.speechSynthesis.speak(utterance);
-        }
-
-        function toggleTranslation(element, textToSpeak) {
-            // Speak
-            speak(textToSpeak);
-            
-            // Show Translation
-            const arDiv = element.querySelector('.ar-text');
-            if(arDiv.style.display === 'block') {
-                arDiv.style.display = 'none';
-            } else {
-                // Hide others first (optional, keeps it clean)
-                document.querySelectorAll('.ar-text').forEach(d => d.style.display = 'none');
-                arDiv.style.display = 'block';
-                arDiv.classList.add('fade-in');
-            }
-        }
-
-        // Start App
-        init();
-
-    </script>
 </body>
-
 </html>

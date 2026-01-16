@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 6: My Family | أ. ثائر الشويلي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
+        :root { --main: #27ae60; --bg: #e8f5e9; --text: #2c3e50; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 80px; color: var(--text); }
+        .top-nav { background: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--main); position: sticky; top: 0; z-index: 100; }
+        .home-btn { text-decoration: none; background: var(--text); color: white; padding: 8px 15px; border-radius: 20px; }
+        .tabs { display: flex; overflow-x: auto; background: white; padding: 10px; gap: 10px; }
+        .tab-btn { background: #eee; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-family: 'Tajawal'; font-weight: bold; }
+        .tab-btn.active { background: var(--main); color: white; }
+        .content-section { display: none; padding: 20px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Family Tree */
+        .family-tree { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .f-row { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .f-card { background: white; padding: 15px; border-radius: 15px; text-align: center; border: 3px solid #eee; cursor: pointer; min-width: 100px; }
+        .f-card:hover { border-color: var(--main); background: #f1f8e9; }
+        .f-icon { font-size: 3rem; display: block; }
+        .f-name { font-family: 'Fredoka'; font-weight: bold; }
+
+        /* Phonics */
+        .letter-row { display: flex; align-items: center; gap: 20px; background: white; padding: 15px; margin-bottom: 10px; border-radius: 15px; cursor: pointer; }
+        .big-letter { font-family: 'Fredoka'; font-size: 3rem; color: var(--main); font-weight: bold; width: 60px; }
+
+        .quiz-opt { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #ddd; background: white; border-radius: 10px; cursor: pointer; }
+        .correct { background: #2ecc71 !important; color: white; }
+        .wrong { background: #e74c3c !important; color: white; }
+        .speak-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 30px; opacity: 0; transition: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">🏠 القائمة</a>
+        <h2 style="margin:0; color:var(--main);">Unit 6: Family</h2>
+        <div></div>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('tree')">🌳 Family (العائلة)</button>
+        <button class="tab-btn" onclick="openTab('places')">📍 Places (الأماكن)</button>
+        <button class="tab-btn" onclick="openTab('phonics')">🔤 Phonics (K,L,M)</button>
+        <button class="tab-btn" onclick="openTab('quiz')">📝 Quiz (اختبار)</button>
+    </div>
+
+    <div id="tree" class="content-section active">
+        <h3 style="text-align: center;">My Family Tree</h3>
+        <div class="family-tree">
+            <div class="f-row">
+                <div class="f-card" onclick="speak('Grandpa')"><span class="f-icon">👴</span><span class="f-name">Grandpa</span></div>
+                <div class="f-card" onclick="speak('Grandma')"><span class="f-icon">👵</span><span class="f-name">Grandma</span></div>
+            </div>
+            <div class="f-row">
+                <div class="f-card" onclick="speak('Dad')"><span class="f-icon">👨</span><span class="f-name">Dad</span></div>
+                <div class="f-card" onclick="speak('Mum')"><span class="f-icon">👩</span><span class="f-name">Mum</span></div>
+            </div>
+            <div class="f-row">
+                <div class="f-card" onclick="speak('Sister')"><span class="f-icon">👧</span><span class="f-name">Sister</span></div>
+                <div class="f-card" onclick="speak('Brother')"><span class="f-icon">👦</span><span class="f-name">Brother</span></div>
+                <div class="f-card" onclick="speak('Baby')"><span class="f-icon">👶</span><span class="f-name">Baby</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="places" class="content-section">
+        <h3>Where are they?</h3>
+        <p>اضغط لمعرفة أين هم:</p>
+        <div class="f-card" style="margin-bottom:10px; width:100%;" onclick="speak('Mum is in the kitchen')">
+            <span class="f-icon">👩🍳</span>
+            <span class="f-name">Mum is in the kitchen.</span>
+        </div>
+        <div class="f-card" style="margin-bottom:10px; width:100%;" onclick="speak('Dad is in the garden')">
+            <span class="f-icon">👨🌳</span>
+            <span class="f-name">Dad is in the garden.</span>
+        </div>
+        <div class="f-card" style="margin-bottom:10px; width:100%;" onclick="speak('Hadi is in the bedroom')">
+            <span class="f-icon">👦🛏️</span>
+            <span class="f-name">Hadi is in the bedroom.</span>
+        </div>
+    </div>
+
+    <div id="phonics" class="content-section">
+        <h3>Letters Kk, Ll, Mm</h3>
+        <div class="letter-row" onclick="speak('K. Key. Kite.')">
+            <div class="big-letter">Kk</div>
+            <div style="font-family:'Fredoka'; font-size:1.2rem;">Key 🔑 | Kite 🪁</div>
+        </div>
+        <div class="letter-row" onclick="speak('L. Lion. Lemon.')">
+            <div class="big-letter">Ll</div>
+            <div style="font-family:'Fredoka'; font-size:1.2rem;">Lion 🦁 | Lemon 🍋</div>
+        </div>
+        <div class="letter-row" onclick="speak('M. Moon. Monkey.')">
+            <div class="big-letter">Mm</div>
+            <div style="font-family:'Fredoka'; font-size:1.2rem;">Moon 🌙 | Monkey 🐵</div>
+        </div>
+    </div>
+
+    <div id="quiz" class="content-section">
+        <h3>اختبر معلوماتك 🌟</h3>
+        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <p>1. Who is this? 👴</p>
+            <button class="quiz-opt" onclick="check(this, true)">Grandpa</button>
+            <button class="quiz-opt" onclick="check(this, false)">Grandma</button>
+        </div>
+        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <p>2. Where do we cook? (أين نطبخ؟)</p>
+            <button class="quiz-opt" onclick="check(this, true)">In the kitchen</button>
+            <button class="quiz-opt" onclick="check(this, false)">In the bedroom</button>
+        </div>
+    </div>
+
+    <div id="toast" class="speak-hint">🔊 جاري النطق...</div>
+    <script>
+        function openTab(id) {
+            document.querySelectorAll('.content-section').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const map = {'tree':0, 'places':1, 'phonics':2, 'quiz':3};
+            document.querySelectorAll('.tab-btn')[map[id]].classList.add('active');
+        }
+        let currentUtterance = null;
+        function speak(text) {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1500);
+            window.speechSynthesis.cancel();
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.lang = 'en-US'; currentUtterance.rate = 0.85;
+            let voices = window.speechSynthesis.getVoices();
+            let enVoice = voices.find(v => v.lang.includes('en'));
+            if(enVoice) currentUtterance.voice = enVoice;
+            window.speechSynthesis.speak(currentUtterance);
+        }
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        function check(btn, isOk) {
+            if(isOk) { btn.classList.add('correct'); speak('Excellent!'); }
+            else { btn.classList.add('wrong'); speak('Try again'); }
+        }
+    </script>
+</body>
+</html>

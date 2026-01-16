@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2: Food & The Cafe | أ. ثائر الشويلي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
+
+        :root {
+            /* لون الوحدة الثانية: برتقالي دافئ (مشبع) */
+            --main: #e67e22;     
+            --secondary: #f39c12;
+            --bg: #fffbf0;
+            --text: #2c3e50;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            padding-bottom: 80px;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--main);
+        }
+
+        .home-btn {
+            text-decoration: none;
+            background: var(--text);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        h2 { margin: 0; color: var(--main); font-weight: 800; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            background: white;
+            padding: 10px;
+            gap: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn {
+            background: #eee;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: 'Tajawal';
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--main);
+            color: white;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.4);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s;
+        }
+        .content-section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Food Grid Styles --- */
+        .food-category {
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .cat-title {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-right: 4px solid var(--main);
+            padding-right: 10px;
+        }
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+        }
+        .food-item {
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .food-item:hover {
+            border-color: var(--main);
+            background: #fff8e1;
+            transform: scale(1.05);
+        }
+        .food-icon { font-size: 3rem; display: block; margin-bottom: 5px; }
+        .food-name { font-family: 'Fredoka'; font-weight: 600; font-size: 1.1rem; }
+
+        /* --- Cafe Conversation Styles --- */
+        .chat-bubble {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 20px;
+            border-bottom-right-radius: 0;
+            margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            border-left: 5px solid var(--main);
+        }
+        .chat-bubble:hover { background: #fdfdfd; transform: translateX(-5px); }
+        .speaker-name { font-weight: bold; font-size: 0.9rem; color: #7f8c8d; margin-bottom: 5px; }
+        .english-text { font-family: 'Fredoka'; font-size: 1.3rem; color: var(--text); }
+        .arabic-text { font-size: 1rem; color: var(--main); display: none; margin-top: 5px; }
+
+        /* --- Likes / Dislikes --- */
+        .like-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .face-card {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 5px solid #eee;
+        }
+        .face-card.happy { border-bottom-color: #2ecc71; }
+        .face-card.sad { border-bottom-color: #e74c3c; }
+
+        /* --- Phonics Box --- */
+        .phonics-board {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 3px dashed var(--main);
+        }
+
+        /* --- Quiz Styles --- */
+        .quiz-question { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
+        .quiz-options button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-family: 'Fredoka';
+        }
+        .correct { background: #2ecc71 !important; border-color: #2ecc71 !important; color: white; }
+        .wrong { background: #e74c3c !important; border-color: #e74c3c !important; color: white; }
+
+        /* Audio Toast */
+        .speak-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">🏠 القائمة</a>
+        <h2>Unit 2: Food & Cafe</h2>
+        <div></div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('vocab')">🍔 المأكولات (Menu)</button>
+        <button class="tab-btn" onclick="openTab('cafe')">☕ في المقهى (Cafe)</button>
+        <button class="tab-btn" onclick="openTab('grammar')">👍 I like (أحب)</button>
+        <button class="tab-btn" onclick="openTab('phonics')">🅱️ حرف (Bb)</button>
+        <button class="tab-btn" onclick="openTab('quiz')">🧠 اختبار (Quiz)</button>
+    </div>
+
+    <div id="vocab" class="content-section active">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <p>اضغط على أي صورة لسماع اسمها 🔊</p>
+        </div>
+
+        <div class="food-category">
+            <div class="cat-title">🍊 Fruits (الفواكه)</div>
+            <div class="food-grid">
+                <div class="food-item" onclick="speak('Banana')">
+                    <span class="food-icon">🍌</span>
+                    <div class="food-name">Banana</div>
+                </div>
+                <div class="food-item" onclick="speak('Mango')">
+                    <span class="food-icon">🥭</span>
+                    <div class="food-name">Mango</div>
+                </div>
+                <div class="food-item" onclick="speak('Watermelon')">
+                    <span class="food-icon">🍉</span>
+                    <div class="food-name">Watermelon</div>
+                </div>
+                <div class="food-item" onclick="speak('Dates')">
+                    <span class="food-icon">🌴</span>
+                    <div class="food-name">Dates</div>
+                    <span style="font-size:0.8rem; color:#888;">(تمر)</span>
+                </div>
+                <div class="food-item" onclick="speak('Grapes')">
+                    <span class="food-icon">🍇</span>
+                    <div class="food-name">Grapes</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-category">
+            <div class="cat-title">🍕 Meals & Drinks (وجبات ومشروبات)</div>
+            <div class="food-grid">
+                <div class="food-item" onclick="speak('Pizza')">
+                    <span class="food-icon">🍕</span>
+                    <div class="food-name">Pizza</div>
+                </div>
+                <div class="food-item" onclick="speak('Sandwich')">
+                    <span class="food-icon">🥪</span>
+                    <div class="food-name">Sandwich</div>
+                </div>
+                <div class="food-item" onclick="speak('Soup')">
+                    <span class="food-icon">🍲</span>
+                    <div class="food-name">Soup</div>
+                </div>
+                <div class="food-item" onclick="speak('Tea')">
+                    <span class="food-icon">☕</span>
+                    <div class="food-name">Tea</div>
+                </div>
+                <div class="food-item" onclick="speak('Milk')">
+                    <span class="food-icon">🥛</span>
+                    <div class="food-name">Milk</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cafe" class="content-section">
+        <div style="background: #fff3e0; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--secondary);">
+            <strong>📝 المفردات الجديدة:</strong><br>
+            Do you want? = هل تريد؟<br>
+            Yes, please = نعم، من فضلك.<br>
+            No, thank you = لا، شكراً.<br>
+            Here you are = تفضل (خذ هذا).
+        </div>
+
+        <h3>🔊 Listen & Repeat (اضغط على الجملة)</h3>
+
+        <div class="chat-bubble" onclick="toggleTrans(this, 'Do you want a pizza?')">
+            <div class="speaker-name">Hadi:</div>
+            <div class="english-text">Do you want a pizza?</div>
+            <div class="arabic-text">هل تريد بيتزا؟</div>
+        </div>
+
+        <div class="chat-bubble" onclick="toggleTrans(this, 'Yes, please.')">
+            <div class="speaker-name">Zack:</div>
+            <div class="english-text">Yes, please.</div>
+            <div class="arabic-text">نعم، من فضلك.</div>
+        </div>
+
+        <div class="chat-bubble" onclick="toggleTrans(this, 'Do you want soup?')">
+            <div class="speaker-name">Hadi:</div>
+            <div class="english-text">Do you want soup?</div>
+            <div class="arabic-text">هل تريد حساء؟</div>
+        </div>
+
+        <div class="chat-bubble" onclick="toggleTrans(this, 'No, thank you.')">
+            <div class="speaker-name">Zack:</div>
+            <div class="english-text">No, thank you.</div>
+            <div class="arabic-text">لا، شكراً.</div>
+        </div>
+
+        <div class="chat-bubble" onclick="toggleTrans(this, 'Here you are.')">
+            <div class="speaker-name">Hadi:</div>
+            <div class="english-text">Here you are.</div>
+            <div class="arabic-text">تفضل (خذ هذا).</div>
+        </div>
+    </div>
+
+    <div id="grammar" class="content-section">
+        <div style="text-align: center;">
+            <h2 style="font-family:'Fredoka'; color:var(--text);">Expressing Likes</h2>
+            <p>كيف تعبر عما تحب وما تكره؟</p>
+        </div>
+
+        <div class="like-container">
+            <div class="face-card happy" onclick="speak('I like bananas. Yummy!')">
+                <div style="font-size: 4rem;">😋</div>
+                <h3 style="color: #27ae60; margin: 10px 0;">I like...</h3>
+                <p style="font-family:'Fredoka'; font-size:1.2rem;">I like bananas.</p>
+                <small>أنا أحب الموز</small>
+            </div>
+
+            <div class="face-card sad" onclick="speak('I do not like soup. Yuck!')">
+                <div style="font-size: 4rem;">😣</div>
+                <h3 style="color: #c0392b; margin: 10px 0;">I don't like...</h3>
+                <p style="font-family:'Fredoka'; font-size:1.2rem;">I don't like soup.</p>
+                <small>أنا لا أحب الحساء</small>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p>اضغط لسماع المزيد من الأمثلة:</p>
+            <button onclick="speak('I like pizza')" style="padding:10px 20px; margin:5px; border-radius:15px; border:none; background:#fff; box-shadow:0 3px 5px rgba(0,0,0,0.1);">🍕 I like Pizza</button>
+            <button onclick="speak('I don\'t like tea')" style="padding:10px 20px; margin:5px; border-radius:15px; border:none; background:#fff; box-shadow:0 3px 5px rgba(0,0,0,0.1);">☕ I don't like Tea</button>
+        </div>
+    </div>
+
+    <div id="phonics" class="content-section">
+        <div class="phonics-board">
+            <h3>Letter Bb</h3>
+            <p>تعلمنا في الوحدة السابقة حرف A، الآن حرف B</p>
+            
+            <div style="font-size: 6rem; font-family: 'Fredoka'; color: var(--main); margin: 20px 0;">Bb</div>
+            
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 20px;">
+                <div onclick="speak('B, Ball')" style="cursor: pointer;">
+                    <div style="font-size: 3rem;">⚽</div>
+                    <div style="font-weight: bold;">Ball</div>
+                </div>
+                <div onclick="speak('B, Bus')" style="cursor: pointer;">
+                    <div style="font-size: 3rem;">🚌</div>
+                    <div style="font-weight: bold;">Bus</div>
+                </div>
+                <div onclick="speak('B, Banana')" style="cursor: pointer;">
+                    <div style="font-size: 3rem;">🍌</div>
+                    <div style="font-weight: bold;">Banana</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="quiz" class="content-section">
+        <h3>اختبر معلوماتك في الوحدة الثانية! 🌟</h3>
+
+        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <div style="text-align: center; font-size: 3rem;">🍉</div>
+            <div class="quiz-question">1. What is this? (ما هذا؟)</div>
+            <div class="quiz-options">
+                <button onclick="checkAnswer(this, false)">Mango</button>
+                <button onclick="checkAnswer(this, true)">Watermelon</button>
+                <button onclick="checkAnswer(this, false)">Pizza</button>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <div class="quiz-question">2. عندما يسألك شخص: Do you want a sandwich? وأنت موافق، ماذا تقول؟</div>
+            <div class="quiz-options">
+                <button onclick="checkAnswer(this, true)">Yes, please.</button>
+                <button onclick="checkAnswer(this, false)">No, thank you.</button>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <div class="quiz-question">3. أكمل الجملة: "I don't ....... soup."</div>
+            <div class="quiz-options">
+                <button onclick="checkAnswer(this, false)">want</button>
+                <button onclick="checkAnswer(this, true)">like</button>
+                <button onclick="checkAnswer(this, false)">love</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="speak-hint">🔊 جاري النطق...</div>
+
+    <script>
+        // --- Tab Navigation Logic ---
+        function openTab(tabId) {
+            // Hide all
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            // Show target
+            document.getElementById(tabId).classList.add('active');
+            
+            // Highlight button
+            const buttons = document.querySelectorAll('.tab-btn');
+            if(tabId === 'vocab') buttons[0].classList.add('active');
+            if(tabId === 'cafe') buttons[1].classList.add('active');
+            if(tabId === 'grammar') buttons[2].classList.add('active');
+            if(tabId === 'phonics') buttons[3].classList.add('active');
+            if(tabId === 'quiz') buttons[4].classList.add('active');
+        }
+
+        // --- Translation Toggle ---
+        function toggleTrans(element, text) {
+            speak(text);
+            const arText = element.querySelector('.arabic-text');
+            if(arText.style.display === 'block') {
+                arText.style.display = 'none';
+            } else {
+                // Close others to keep UI clean (Optional)
+                document.querySelectorAll('.arabic-text').forEach(t => t.style.display = 'none');
+                arText.style.display = 'block';
+            }
+        }
+
+        // --- Audio Logic (Enhanced for Android) ---
+        let currentUtterance = null;
+
+        function speak(text) {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = 1;
+            setTimeout(() => toast.style.opacity = 0, 1500);
+
+            window.speechSynthesis.cancel();
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.lang = 'en-US';
+            currentUtterance.rate = 0.85;
+            currentUtterance.pitch = 1.1;
+
+            let voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                let englishVoice = voices.find(v => v.lang.includes('en'));
+                if (englishVoice) currentUtterance.voice = englishVoice;
+            }
+
+            window.speechSynthesis.speak(currentUtterance);
+            
+            // Cleanup
+            currentUtterance.onend = function() { currentUtterance = null; };
+        }
+
+        window.speechSynthesis.onvoiceschanged = function() {
+            window.speechSynthesis.getVoices();
+        };
+
+        // --- Quiz Logic ---
+        function checkAnswer(btn, isCorrect) {
+            if(isCorrect) {
+                btn.classList.add('correct');
+                btn.textContent += " ✅ (ممتاز!)";
+                speak("Excellent!");
+            } else {
+                btn.classList.add('wrong');
+                btn.textContent += " ❌ (حاول مجدداً)";
+                speak("Try again");
+            }
+        }
+    </script>
+</body>
+</html>

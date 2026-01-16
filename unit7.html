@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 7: Fun Park | أ. ثائر الشويلي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
+        :root { --main: #e74c3c; --bg: #ffebee; --text: #2c3e50; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 80px; color: var(--text); }
+        .top-nav { background: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--main); position: sticky; top: 0; z-index: 100; }
+        .home-btn { text-decoration: none; background: var(--text); color: white; padding: 8px 15px; border-radius: 20px; }
+        .tabs { display: flex; overflow-x: auto; background: white; padding: 10px; gap: 10px; }
+        .tab-btn { background: #eee; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-family: 'Tajawal'; font-weight: bold; }
+        .tab-btn.active { background: var(--main); color: white; }
+        .content-section { display: none; padding: 20px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Rides */
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+        .card { background: white; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; border-bottom: 4px solid #ddd; transition: 0.2s; }
+        .card:hover { transform: translateY(-5px); border-bottom-color: var(--main); }
+        .card-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
+
+        /* Feelings */
+        .feeling-row { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
+        .feel-box { background: white; padding: 20px; border-radius: 50%; width: 120px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 3px solid #eee; cursor: pointer; }
+        .feel-box.happy { border-color: #f1c40f; } .feel-box.sad { border-color: #3498db; }
+        
+        /* Phonics */
+        .letter-row { display: flex; align-items: center; gap: 20px; background: white; padding: 15px; margin-bottom: 10px; border-radius: 15px; cursor: pointer; }
+        .big-letter { font-family: 'Fredoka'; font-size: 3rem; color: var(--main); font-weight: bold; width: 60px; }
+
+        .quiz-opt { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #ddd; background: white; border-radius: 10px; cursor: pointer; }
+        .correct { background: #2ecc71 !important; color: white; }
+        .wrong { background: #e74c3c !important; color: white; }
+        .speak-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 30px; opacity: 0; transition: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">🏠 القائمة</a>
+        <h2 style="margin:0; color:var(--main);">Unit 7: Fun Park</h2>
+        <div></div>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('rides')">🎡 Rides (الألعاب)</button>
+        <button class="tab-btn" onclick="openTab('feelings')">😃 Feelings (المشاعر)</button>
+        <button class="tab-btn" onclick="openTab('can')">💪 I can (أستطيع)</button>
+        <button class="tab-btn" onclick="openTab('phonics')">🔤 Phonics (N,O,P)</button>
+        <button class="tab-btn" onclick="openTab('quiz')">📝 Quiz (اختبار)</button>
+    </div>
+
+    <div id="rides" class="content-section active">
+        <h3 style="text-align: center;">Let's Play!</h3>
+        <div class="grid-cards">
+            <div class="card" onclick="speak('Big Wheel')"><span class="card-icon">🎡</span>Big Wheel</div>
+            <div class="card" onclick="speak('Swing')"><span class="card-icon">🌬️</span>Swing</div>
+            <div class="card" onclick="speak('Slide')"><span class="card-icon">🎢</span>Slide</div>
+            <div class="card" onclick="speak('Roundabout')"><span class="card-icon">🎠</span>Roundabout</div>
+        </div>
+    </div>
+
+    <div id="feelings" class="content-section">
+        <h3>How do you feel?</h3>
+        <div class="feeling-row">
+            <div class="feel-box happy" onclick="speak('I am Happy')"><span style="font-size:3rem;">😄</span>Happy</div>
+            <div class="feel-box sad" onclick="speak('I am Sad')"><span style="font-size:3rem;">😢</span>Sad</div>
+            <div class="feel-box" onclick="speak('I am Hungry')"><span style="font-size:3rem;">😋</span>Hungry</div>
+            <div class="feel-box" onclick="speak('I am Thirsty')"><span style="font-size:3rem;">🥤</span>Thirsty</div>
+        </div>
+    </div>
+
+    <div id="can" class="content-section">
+        <h3>Abilities</h3>
+        <div class="card" style="margin-bottom:10px;" onclick="speak('I can swim')">🏊 I can swim (أستطيع السباحة)</div>
+        <div class="card" style="margin-bottom:10px;" onclick="speak('I can jump')">🏃 I can jump (أستطيع القفز)</div>
+        <div class="card" style="margin-bottom:10px;" onclick="speak('I can\'t fly')">🕊️ I can't fly (لا أستطيع الطيران)</div>
+    </div>
+
+    <div id="phonics" class="content-section">
+        <h3>Letters Nn, Oo, Pp</h3>
+        <div class="letter-row" onclick="speak('N. Net. Nose.')"><div class="big-letter">Nn</div><div style="font-family:'Fredoka'; font-size:1.2rem;">Net 🕸️ | Nose 👃</div></div>
+        <div class="letter-row" onclick="speak('O. Orange. Olive.')"><div class="big-letter">Oo</div><div style="font-family:'Fredoka'; font-size:1.2rem;">Orange 🍊 | Olive 🫒</div></div>
+        <div class="letter-row" onclick="speak('P. Pen. Plane.')"><div class="big-letter">Pp</div><div style="font-family:'Fredoka'; font-size:1.2rem;">Pen 🖊️ | Plane ✈️</div></div>
+    </div>
+
+    <div id="quiz" class="content-section">
+        <h3>اختبر معلوماتك 🌟</h3>
+        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <p>1. I want water. I am ...</p>
+            <button class="quiz-opt" onclick="check(this, false)">Hungry</button>
+            <button class="quiz-opt" onclick="check(this, true)">Thirsty</button>
+        </div>
+        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <p>2. What is this? 🎡</p>
+            <button class="quiz-opt" onclick="check(this, true)">Big wheel</button>
+            <button class="quiz-opt" onclick="check(this, false)">Swing</button>
+        </div>
+    </div>
+
+    <div id="toast" class="speak-hint">🔊 جاري النطق...</div>
+    <script>
+        function openTab(id) {
+            document.querySelectorAll('.content-section').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const map = {'rides':0, 'feelings':1, 'can':2, 'phonics':3, 'quiz':4};
+            document.querySelectorAll('.tab-btn')[map[id]].classList.add('active');
+        }
+        let currentUtterance = null;
+        function speak(text) {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1500);
+            window.speechSynthesis.cancel();
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.lang = 'en-US'; currentUtterance.rate = 0.85;
+            let voices = window.speechSynthesis.getVoices();
+            let enVoice = voices.find(v => v.lang.includes('en'));
+            if(enVoice) currentUtterance.voice = enVoice;
+            window.speechSynthesis.speak(currentUtterance);
+        }
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        function check(btn, isOk) {
+            if(isOk) { btn.classList.add('correct'); speak('Good job!'); }
+            else { btn.classList.add('wrong'); speak('Try again'); }
+        }
+    </script>
+</body>
+</html>
