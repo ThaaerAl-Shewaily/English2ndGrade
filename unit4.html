@@ -3,124 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 4: Revision | أ. ثائر الشويلي</title>
+    <title>الوحدة الرابعة: مراجعة | أ. ثائر الشويلي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
-        :root { --main: #f39c12; --bg: #fffbf0; --text: #2c3e50; }
-        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 80px; color: var(--text); }
-        .top-nav { background: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--main); position: sticky; top: 0; z-index: 100; }
-        .home-btn { text-decoration: none; background: var(--text); color: white; padding: 8px 15px; border-radius: 20px; }
-        .tabs { display: flex; overflow-x: auto; background: white; padding: 10px; gap: 10px; }
-        .tab-btn { background: #eee; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-family: 'Tajawal'; font-weight: bold; }
-        .tab-btn.active { background: var(--main); color: white; }
-        .content-section { display: none; padding: 20px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s; }
-        .content-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Tajawal:wght@500;800&display=swap');
+        :root { --sb-color: #f39c12; --ab-color: #d35400; --bg-color: #fffcf5; --text-dark: #2c3e50; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg-color); margin: 0; padding-bottom: 100px; color: var(--text-dark); }
         
-        /* Story Styles */
-        .story-card { background: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; border: 2px dashed var(--main); cursor: pointer; text-align: center; }
-        .story-img { font-size: 4rem; display: block; margin-bottom: 10px; }
+        .main-header { background: linear-gradient(135deg, #f39c12, #f1c40f); color: white; padding: 25px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .back-btn-fixed { position: absolute; top: 25px; right: 20px; background: rgba(255,255,255,0.25); color: white; text-decoration: none; padding: 10px 25px; border-radius: 30px; border: 2px solid white; font-weight: bold; }
         
-        /* Review Grids */
-        .review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .r-item { background: white; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #ddd; cursor: pointer; }
-        .r-item:hover { background: #fff8e1; border-color: var(--main); }
+        .section-view { display: none; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .section-view.active { display: block; animation: slideUp 0.6s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-        .quiz-opt { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #ddd; background: white; border-radius: 10px; cursor: pointer; }
-        .correct { background: #2ecc71 !important; color: white; }
-        .wrong { background: #e74c3c !important; color: white; }
-        .speak-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 30px; opacity: 0; transition: 0.3s; }
+        .hero-menu { display: flex; flex-direction: column; gap: 30px; margin-top: 50px; align-items: center; }
+        .big-btn { width: 90%; max-width: 600px; padding: 45px; border-radius: 35px; border: none; cursor: pointer; text-align: center; font-size: 2.2rem; font-weight: 800; font-family: 'Tajawal'; color: white; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transition: transform 0.2s; }
+        .big-btn:hover { transform: scale(1.02); }
+        .btn-yellow { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .btn-orange { background: linear-gradient(135deg, #e67e22, #d35400); }
+        
+        .page-block { background: white; border-radius: 30px; margin-bottom: 60px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow: hidden; border: 4px solid #eee; }
+        .page-header { padding: 25px 40px; font-size: 2rem; font-weight: bold; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .ph-yellow { background: var(--sb-color); }
+        .ph-orange { background: var(--ab-color); }
+        .page-body { padding: 40px; }
+        
+        .note-box { background: #fffde7; border: 3px solid #fff59d; border-right: 10px solid #fbc02d; padding: 30px; border-radius: 20px; margin-bottom: 40px; font-size: 1.4rem; line-height: 1.8; color: #f57f17; }
+        
+        .grid-huge { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+        .card-item { background: white; border: 4px solid #f1f1f1; border-radius: 30px; padding: 30px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .card-item:hover { border-color: var(--sb-color); background: #fffdf0; transform: translateY(-10px); }
+        .emoji-huge { font-size: 6rem; display: block; margin-bottom: 20px; }
+        .word-en { font-family: 'Fredoka'; font-size: 2.5rem; font-weight: 700; color: #2c3e50; }
+        .word-ar { font-size: 1.6rem; color: #7f8c8d; margin-top: 10px; font-weight: bold; }
+
+        .story-block { background: #fff3e0; padding: 20px; border-radius: 20px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; gap: 20px; border: 3px dashed #f39c12; }
+        .story-block:hover { background: #ffe0b2; }
+
+        .internal-nav { padding: 20px 0; }
+        .back-small { background: #34495e; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 1.3rem; cursor: pointer; font-family: 'Tajawal'; }
+        .toast { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: white; padding: 20px 50px; border-radius: 60px; font-size: 1.4rem; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000; }
     </style>
 </head>
 <body>
-    <div class="top-nav">
-        <a href="index.html" class="home-btn">🏠 القائمة</a>
-        <h2 style="margin:0; color:var(--main);">Unit 4: Revision</h2>
-        <div></div>
-    </div>
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('story')">🐭 Story (القصة)</button>
-        <button class="tab-btn" onclick="openTab('mix')">🔄 Review (مراجعة)</button>
-        <button class="tab-btn" onclick="openTab('quiz')">📝 Challenge (تحدي)</button>
+
+    <div class="main-header">
+        <h1>Unit 4: Revision (مراجعة)</h1>
+        <a href="index.html" class="back-btn-fixed">🏠 الرئيسية</a>
     </div>
 
-    <div id="story" class="content-section active">
-        <h3 style="text-align: center;">The Hungry Mouse</h3>
-        <p style="text-align: center; color: #777;">اضغط على أحداث القصة للاستماع</p>
-        
-        <div class="story-card" onclick="speak('I am a mouse. I am hungry.')">
-            <span class="story-img">🐭😩</span>
-            <p><strong>Mouse:</strong> I am a mouse. I am hungry.</p>
-            <small>أنا فأر. أنا جائع.</small>
-        </div>
-
-        <div class="story-card" onclick="speak('I want a sandwich and cake.')">
-            <span class="story-img">🥪🍰</span>
-            <p><strong>Mouse:</strong> I want a sandwich and cake.</p>
-            <small>أريد شطيرة وكعكة.</small>
-        </div>
-        
-        <div class="story-card" onclick="speak('Yummy! I like cake.')">
-            <span class="story-img">😋🎂</span>
-            <p><strong>Mouse:</strong> Yummy! I like cake.</p>
-            <small>لذيذ! أنا أحب الكعك.</small>
+    <div id="menu-view" class="section-view active">
+        <div class="hero-menu">
+            <button onclick="openBook('student')" class="big-btn btn-yellow">📘 كتاب الطالب (Student's Book)</button>
+            <button onclick="openBook('activity')" class="big-btn btn-orange">📙 كتاب النشاط (Activity Book)</button>
         </div>
     </div>
 
-    <div id="mix" class="content-section">
-        <h3>Food & Toys Review</h3>
-        <div class="review-grid">
-            <div class="r-item" onclick="speak('It is a Kite')">🪁<br>Kite</div>
-            <div class="r-item" onclick="speak('It is a Robot')">🤖<br>Robot</div>
-            <div class="r-item" onclick="speak('I like Pizza')">🍕<br>Pizza</div>
-            <div class="r-item" onclick="speak('I like Soup')">🍲<br>Soup</div>
-            <div class="r-item" onclick="speak('In the bin')">🗑️<br>Bin</div>
-            <div class="r-item" onclick="speak('On the bed')">🛏️<br>Bed</div>
+    <div id="student-view" class="section-view">
+        <div class="internal-nav"><button onclick="goBack()" class="back-small">⬅️ رجوع</button></div>
+
+        <div class="page-block">
+            <div class="page-header ph-yellow"><span>Story: The Hungry Mouse</span><span>قصة الفأر الجائع</span></div>
+            <div class="page-body">
+                <div class="note-box">🐭 <strong>قصة:</strong> فأر جائع يبحث عن الطعام، يقابل أفعى. نراجع فيها أسماء الطعام والمشاعر.</div>
+                
+                <div class="story-block" onclick="speak('I am a mouse. I am hungry.')">
+                    <span class="emoji-huge">🐭😩</span>
+                    <div><div class="word-en">I'm a mouse. I'm hungry.</div><div class="word-ar">أنا فأر. أنا جائع.</div></div>
+                </div>
+                <div class="story-block" onclick="speak('I want a sandwich and cake.')">
+                    <span class="emoji-huge">🥪🍰</span>
+                    <div><div class="word-en">I want a sandwich and cake.</div><div class="word-ar">أريد شطيرة وكعكة.</div></div>
+                </div>
+                <div class="story-block" onclick="speak('Hello Mouse. I am a snake.')">
+                    <span class="emoji-huge">🐍👋</span>
+                    <div><div class="word-en">Hello Mouse. I'm a snake.</div><div class="word-ar">مرحباً أيها الفأر. أنا أفعى.</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-yellow"><span>Review</span><span>مراجعة شاملة</span></div>
+            <div class="page-body">
+                <div class="note-box">🔄 <strong>مراجعة:</strong> الطعام، الألعاب، حروف الجر.</div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Pizza')"><span class="emoji-huge">🍕</span><div class="word-en">Pizza</div></div>
+                    <div class="card-item" onclick="speak('Soup')"><span class="emoji-huge">🍲</span><div class="word-en">Soup</div></div>
+                    <div class="card-item" onclick="speak('In the bin')"><span class="emoji-huge">🗑️</span><div class="word-en">In the bin</div></div>
+                    <div class="card-item" onclick="speak('Under the bed')"><span class="emoji-huge">🛏️👇</span><div class="word-en">Under the bed</div></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="quiz" class="content-section">
-        <h3>هل تتذكر؟ 🤔</h3>
-        
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div style="font-size:3rem; text-align:center;">🍉</div>
-            <p>1. This is a ...</p>
-            <button class="quiz-opt" onclick="check(this, false)">Date</button>
-            <button class="quiz-opt" onclick="check(this, true)">Watermelon</button>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <p>2. The ball is ..... the box (داخل الصندوق)</p>
-            <button class="quiz-opt" onclick="check(this, true)">In</button>
-            <button class="quiz-opt" onclick="check(this, false)">On</button>
+    <div id="activity-view" class="section-view">
+        <div class="internal-nav"><button onclick="goBack()" class="back-small">⬅️ رجوع</button></div>
+        <div class="page-block">
+            <div class="page-header ph-orange"><span>Letters F, G</span></div>
+            <div class="page-body">
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('F. Flower')"><span class="emoji-huge">🌸</span><div class="word-en">Flower</div></div>
+                    <div class="card-item" onclick="speak('F. Fish')"><span class="emoji-huge">🐟</span><div class="word-en">Fish</div></div>
+                    <div class="card-item" onclick="speak('G. Girl')"><span class="emoji-huge">👧</span><div class="word-en">Girl</div></div>
+                    <div class="card-item" onclick="speak('G. Goat')"><span class="emoji-huge">🐐</span><div class="word-en">Goat</div></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="toast" class="speak-hint">🔊 جاري النطق...</div>
+    <div id="toast" class="toast">🔊 جاري النطق...</div>
     <script>
-        function openTab(id) {
-            document.querySelectorAll('.content-section').forEach(e => e.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            const map = {'story':0, 'mix':1, 'quiz':2};
-            document.querySelectorAll('.tab-btn')[map[id]].classList.add('active');
-        }
-        let currentUtterance = null;
+        function openBook(type) { document.getElementById('menu-view').classList.remove('active'); document.getElementById(type+'-view').classList.add('active'); window.scrollTo(0,0); }
+        function goBack() { document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active')); document.getElementById('menu-view').classList.add('active'); window.scrollTo(0,0); }
         function speak(text) {
-            const toast = document.getElementById('toast');
-            toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1500);
-            window.speechSynthesis.cancel();
-            currentUtterance = new SpeechSynthesisUtterance(text);
-            currentUtterance.lang = 'en-US'; currentUtterance.rate = 0.85;
-            let voices = window.speechSynthesis.getVoices();
-            let enVoice = voices.find(v => v.lang.includes('en'));
-            if(enVoice) currentUtterance.voice = enVoice;
-            window.speechSynthesis.speak(currentUtterance);
-        }
-        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-        function check(btn, isOk) {
-            if(isOk) { btn.classList.add('correct'); speak('Correct!'); }
-            else { btn.classList.add('wrong'); speak('Try again'); }
+            const t = document.getElementById('toast'); t.style.opacity=1; setTimeout(()=>t.style.opacity=0, 1500);
+            window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85; window.speechSynthesis.speak(u);
         }
     </script>
 </body>

@@ -3,381 +3,567 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1: Hello & Toys | أ. ثائر الشويلي</title>
+    <title>الوحدة الأولى: المرجع الشامل المكبر | أ. ثائر الشويلي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Tajawal:wght@500;800&display=swap');
 
         :root {
-            --main: #FF6B6B;     /* لون الوحدة الرئيسي */
-            --bg: #FFF5F5;
-            --text: #2D3436;
+            --sb-color: #2980b9; /* أزرق لكتاب الطالب */
+            --ab-color: #d35400; /* برتقالي لكتاب النشاط */
+            --bg-color: #f4f7f6;
+            --text-dark: #2c3e50;
+            --card-bg: #ffffff;
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg);
+            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
-            color: var(--text);
-            padding-bottom: 80px;
+            color: var(--text-dark);
+            padding-bottom: 100px;
         }
 
-        /* Header Navigation */
-        .top-nav {
-            background: white;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        /* --- التنقل والعناوين --- */
+        .main-header {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
-
-        .home-btn {
+        .main-header h1 { margin: 0; font-size: 2rem; }
+        .back-btn-fixed {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
             text-decoration: none;
-            background: var(--text);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        h2 { margin: 0; color: var(--main); }
-
-        /* Tabs System */
-        .tabs {
-            display: flex;
-            overflow-x: auto;
-            background: white;
-            padding: 10px;
-            gap: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .tab-btn {
-            background: #eee;
-            border: none;
             padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            white-space: nowrap;
-            font-family: 'Tajawal';
+            border-radius: 30px;
             font-weight: bold;
-            flex-shrink: 0;
+            font-size: 1rem;
+            border: 2px solid white;
         }
 
-        .tab-btn.active {
-            background: var(--main);
+        /* --- القوائم والاختيارات --- */
+        .section-view { display: none; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .section-view.active { display: block; animation: slideUp 0.5s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 50px;
+            align-items: center;
+        }
+
+        .big-btn {
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Tajawal';
             color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
         }
+        .big-btn:hover { transform: scale(1.03); box-shadow: 0 15px 30px rgba(0,0,0,0.25); }
+        .btn-blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .btn-orange { background: linear-gradient(135deg, #e67e22, #d35400); }
+        .btn-gray { background: #7f8c8d; font-size: 1.5rem; padding: 20px; }
 
-        /* Sections */
-        .content-section {
-            display: none;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 0.5s;
-        }
-        .content-section.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Lesson Cards */
-        .character-card {
+        /* --- تصميم الصفحات الداخلية --- */
+        .page-block {
             background: white;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 3px solid #eee;
+        }
+        
+        .page-header {
+            padding: 20px 30px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+        .ph-blue { background: var(--sb-color); }
+        .ph-orange { background: var(--ab-color); }
+
+        .page-body { padding: 30px; }
+
+        /* --- مربع الشرح (Teacher Note) --- */
+        .note-box {
+            background: #fff8e1;
+            border: 3px solid #ffecb3;
+            border-right: 8px solid #ffca28;
+            padding: 25px;
             border-radius: 15px;
-            padding: 15px;
+            margin-bottom: 30px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #5d4037;
+        }
+        .note-icon { font-size: 1.5rem; vertical-align: middle; margin-left: 10px; }
+
+        /* --- الشبكات والعناصر (Grids & Items) --- */
+        .grid-huge {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .card-item {
+            background: #ffffff;
+            border: 3px solid #e0e0e0;
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .card-item:hover {
+            border-color: var(--sb-color);
+            transform: translateY(-8px);
+            background: #f0f9ff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* تكبير العناصر */
+        .emoji-huge { font-size: 5rem; display: block; margin-bottom: 15px; }
+        .word-en { font-family: 'Fredoka'; font-size: 2.2rem; font-weight: 700; color: #2c3e50; line-height: 1.2; }
+        .word-ar { font-size: 1.4rem; color: #7f8c8d; margin-top: 10px; font-weight: bold; }
+
+        /* ألوان خاصة لبطاقات الألوان */
+        .color-circle { width: 80px; height: 80px; border-radius: 50%; display: inline-block; margin-bottom: 15px; border: 4px solid rgba(0,0,0,0.1); }
+
+        /* مربعات المحادثة */
+        .dialogue-row {
+            background: #f8f9fa;
+            border-left: 8px solid #2ecc71;
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            gap: 20px;
             cursor: pointer;
-            border-right: 5px solid var(--main);
         }
-        
-        .char-img { font-size: 3rem; background: #eee; padding: 10px; border-radius: 50%; }
-        .char-info h3 { margin: 0; font-family: 'Fredoka'; font-size: 1.5rem; }
-        .char-info p { margin: 5px 0 0; color: #666; font-size: 0.9rem; }
+        .dialogue-row:hover { background: #e8f5e9; }
 
-        /* Grammar Box (His/Her) */
-        .grammar-box {
-            background: white;
-            border: 2px dashed var(--main);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            margin-top: 20px;
+        /* زر الرجوع الداخلي */
+        .internal-nav { padding: 20px 0; text-align: left; }
+        .back-small {
+            background: #34495e; color: white; border: none; padding: 12px 30px;
+            border-radius: 50px; font-size: 1.2rem; cursor: pointer; font-family: 'Tajawal';
         }
-        .grammar-example {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .g-item { background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); width: 45%; }
 
-        /* Phonics & Writing */
-        .tracing-box {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            text-align: center;
+        /* رسالة النطق */
+        .toast {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.9); color: white; padding: 15px 40px;
+            border-radius: 50px; font-size: 1.2rem; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000;
         }
-        .letter-big { font-size: 6rem; font-family: 'Fredoka'; color: var(--main); line-height: 1; }
-        .word-list { text-align: left; direction: ltr; margin-top: 20px; }
-        .word-item { font-size: 1.5rem; border-bottom: 1px solid #eee; padding: 10px; cursor: pointer; }
 
-        /* Quiz Styles */
-        .quiz-question { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
-        .quiz-options button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 10px;
-            border: 2px solid #ddd;
-            background: white;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-family: 'Fredoka';
-        }
-        .correct { background: #4ECDC4 !important; border-color: #4ECDC4 !important; color: white; }
-        .wrong { background: #FF6B6B !important; border-color: #FF6B6B !important; color: white; }
-
-        /* Floating Audio Button */
-        .speak-hint {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s;
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 600px) {
+            .page-header { font-size: 1.4rem; flex-direction: column; text-align: center; gap: 10px; }
+            .emoji-huge { font-size: 4rem; }
+            .word-en { font-size: 1.8rem; }
+            .big-btn { font-size: 1.5rem; padding: 30px; }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <a href="index.html" class="home-btn">🏠 القائمة</a>
-        <h2>Unit 1: Hello & Toys</h2>
-        <div></div>
+    <div class="main-header">
+        <h1>Unit 1: المرجع المفصل</h1>
+        <a href="index.html" class="back-btn-fixed">🏠 الرئيسية</a>
     </div>
 
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('lesson')">📚 الدرس (Lesson)</button>
-        <button class="tab-btn" onclick="openTab('grammar')">🔤 القواعد (His/Her)</button>
-        <button class="tab-btn" onclick="openTab('phonics')">✍️ الكتابة (Activity)</button>
-        <button class="tab-btn" onclick="openTab('quiz')">📝 اختبار (Quiz)</button>
-    </div>
-
-    <div id="lesson" class="content-section active">
-        <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-            <p><strong>أهداف الدرس (صفحة 4-5):</strong><br>
-            1. التعرف على الشخصيات.<br>
-            2. السؤال عن الاسم والعمر.<br>
-            3. تعلم الأرقام (1-5).</p>
-        </div>
-
-        <h3>🔊 Listen & Repeat (اضغط للاستماع)</h3>
-        
-        <div class="character-card" onclick="speak('Hello, I am Zack.')">
-            <div class="char-img">🤖</div>
-            <div class="char-info">
-                <h3>Zack</h3>
-                <p>مرحباً، أنا زاك.</p>
-            </div>
-        </div>
-
-        <div class="character-card" onclick="speak('Hello, I am Hadi.')">
-            <div class="char-img">👦🏻</div>
-            <div class="char-info">
-                <h3>Hadi</h3>
-                <p>مرحباً، أنا هادي.</p>
-            </div>
-        </div>
-
-        <div class="character-card" onclick="speak('Hello, I am Deena.')">
-            <div class="char-img">👧🏻</div>
-            <div class="char-info">
-                <h3>Deena</h3>
-                <p>مرحباً، أنا دينا.</p>
-            </div>
-        </div>
-
-        <div class="character-card" onclick="speak('How old are you? I am seven.')">
-            <div class="char-img">🎂</div>
-            <div class="char-info">
-                <h3>How old are you?</h3>
-                <p>كم عمرك؟ ... عمري 7 سنوات.</p>
-            </div>
-        </div>
-
-        <h3>🔢 Numbers (الأرقام)</h3>
-        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-            <button onclick="speak('One')" style="font-size: 1.5rem; padding: 15px; border-radius: 10px; border:none; background:white;">1️⃣ One</button>
-            <button onclick="speak('Two')" style="font-size: 1.5rem; padding: 15px; border-radius: 10px; border:none; background:white;">2️⃣ Two</button>
-            <button onclick="speak('Three')" style="font-size: 1.5rem; padding: 15px; border-radius: 10px; border:none; background:white;">3️⃣ Three</button>
-            <button onclick="speak('Four')" style="font-size: 1.5rem; padding: 15px; border-radius: 10px; border:none; background:white;">4️⃣ Four</button>
-            <button onclick="speak('Five')" style="font-size: 1.5rem; padding: 15px; border-radius: 10px; border:none; background:white;">5️⃣ Five</button>
-        </div>
-    </div>
-
-    <div id="grammar" class="content-section">
-        <div class="grammar-box">
-            <h2 style="font-family: 'Fredoka';">His & Her</h2>
-            <p>نستخدم <strong>His</strong> للولد (له) <br> ونستخدم <strong>Her</strong> للبنت (لها)</p>
+    <div id="menu-view" class="section-view active">
+        <div class="hero-menu">
+            <button onclick="openBook('student')" class="big-btn btn-blue">
+                📘 كتاب الطالب
+                <span style="font-size:1rem; display:block; opacity:0.8">(Student's Book)</span>
+            </button>
             
-            <div class="grammar-example">
-                <div class="g-item" onclick="speak('His ball')">
-                    <span style="font-size: 3rem;">👦🏻⚽</span>
-                    <p><strong>His</strong> ball<br>(كرته)</p>
+            <button onclick="openBook('activity')" class="big-btn btn-orange">
+                📙 كتاب النشاط
+                <span style="font-size:1rem; display:block; opacity:0.8">(Activity Book)</span>
+            </button>
+
+            <a href="index.html" class="big-btn btn-gray" style="text-decoration:none;">
+                الرجوع للقائمة الرئيسية
+            </a>
+        </div>
+    </div>
+
+    <div id="student-view" class="section-view">
+        <div class="internal-nav">
+            <button onclick="goBack()" class="back-small">⬅️ رجوع للاختيار</button>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Page 4: Hello</span>
+                <span>الصفحة 4</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">💡</span>
+                    في هذا الدرس نتعرف على أصدقائنا (الشخصيات الأربعة). ونتعلم السؤال عن الاسم (What's your name) والسؤال عن العمر (How old are you).
                 </div>
-                <div class="g-item" onclick="speak('Her kite')">
-                    <span style="font-size: 3rem;">👧🏻🪁</span>
-                    <p><strong>Her</strong> kite<br>(طائرتها الورقية)</p>
+
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Hello, I am Zack')"><span class="emoji-huge">🤖</span><div class="word-en">Zack</div><div class="word-ar">زاك</div></div>
+                    <div class="card-item" onclick="speak('Hello, I am Hadi')"><span class="emoji-huge">👦🏻</span><div class="word-en">Hadi</div><div class="word-ar">هادي</div></div>
+                    <div class="card-item" onclick="speak('Hello, I am Deena')"><span class="emoji-huge">👧🏻</span><div class="word-en">Deena</div><div class="word-ar">دينا</div></div>
+                    <div class="card-item" onclick="speak('Hello, I am Kareem')"><span class="emoji-huge">🧑🏻</span><div class="word-en">Kareem</div><div class="word-ar">كريم</div></div>
+                </div>
+
+                <h3 style="margin-top:40px; font-size:1.5rem;">🗣️ المحادثة (Listen & Say):</h3>
+                <div class="dialogue-row" onclick="speak('Hello, What is your name?')">
+                    <span style="font-size:3rem;">❓</span>
+                    <div>
+                        <div class="word-en">What's your name?</div>
+                        <div class="word-ar">ما اسمك؟</div>
+                    </div>
+                </div>
+                <div class="dialogue-row" onclick="speak('I am Hadi')">
+                    <span style="font-size:3rem;">👦🏻</span>
+                    <div>
+                        <div class="word-en">I'm Hadi.</div>
+                        <div class="word-ar">أنا هادي.</div>
+                    </div>
+                </div>
+                <div class="dialogue-row" onclick="speak('How old are you? I am seven.')">
+                    <span style="font-size:3rem;">🎂</span>
+                    <div>
+                        <div class="word-en">How old are you?</div>
+                        <div class="word-ar">كم عمرك؟ (أنا عمري 7)</div>
+                    </div>
                 </div>
             </div>
-             <div class="grammar-example">
-                <div class="g-item" onclick="speak('His car')">
-                    <span style="font-size: 3rem;">👦🏻🚗</span>
-                    <p><strong>His</strong> car<br>(سيارته)</p>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Page 5: His & Her</span>
+                <span>الصفحة 5</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">📝</span>
+                    <strong>صفات التملك:</strong>
+                    <br>• نستخدم <strong>His</strong> للمذكر (بمعنى: لهُ).
+                    <br>• نستخدم <strong>Her</strong> للمؤنث (بمعنى: لها).
                 </div>
-                <div class="g-item" onclick="speak('Her bag')">
-                    <span style="font-size: 3rem;">👧🏻🎒</span>
-                    <p><strong>Her</strong> bag<br>(حقيبتها)</p>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('His ball')">
+                        <span class="emoji-huge">👦🏻⚽</span>
+                        <div class="word-en">His ball</div>
+                        <div class="word-ar">كرته</div>
+                    </div>
+                    <div class="card-item" onclick="speak('Her ball')">
+                        <span class="emoji-huge">👧🏻⚽</span>
+                        <div class="word-en">Her ball</div>
+                        <div class="word-ar">كرتها</div>
+                    </div>
+                     <div class="card-item" onclick="speak('His pencil')">
+                        <span class="emoji-huge">👦🏻✏️</span>
+                        <div class="word-en">His pencil</div>
+                        <div class="word-ar">قلمه</div>
+                    </div>
+                    <div class="card-item" onclick="speak('Her pencil')">
+                        <span class="emoji-huge">👧🏻✏️</span>
+                        <div class="word-en">Her pencil</div>
+                        <div class="word-ar">قلمها</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Page 6: In the Toyshop</span>
+                <span>الصفحة 6</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">🧸</span>
+                    نتعلم أسماء الألعاب في المتجر. ونتعلم السؤال بـ <strong>What is this?</strong> (ما هذا؟) والسؤال عن العدد <strong>How many?</strong>.
+                </div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Robot')"><span class="emoji-huge">🤖</span><div class="word-en">Robot</div><div class="word-ar">روبوت</div></div>
+                    <div class="card-item" onclick="speak('Kite')"><span class="emoji-huge">🪁</span><div class="word-en">Kite</div><div class="word-ar">طائرة ورقية</div></div>
+                    <div class="card-item" onclick="speak('Ball')"><span class="emoji-huge">⚽</span><div class="word-en">Ball</div><div class="word-ar">كرة</div></div>
+                    <div class="card-item" onclick="speak('Bike')"><span class="emoji-huge">🚲</span><div class="word-en">Bike</div><div class="word-ar">دراجة</div></div>
+                    <div class="card-item" onclick="speak('Book')"><span class="emoji-huge">📚</span><div class="word-en">Book</div><div class="word-ar">كتاب</div></div>
+                    <div class="card-item" onclick="speak('Pen')"><span class="emoji-huge">🖊️</span><div class="word-en">Pen</div><div class="word-ar">قلم جاف</div></div>
+                    <div class="card-item" onclick="speak('Yo-yo')"><span class="emoji-huge">🪀</span><div class="word-en">Yo-yo</div><div class="word-ar">يويو</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Page 7: Numbers</span>
+                <span>الصفحة 7</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">1️⃣</span>
+                    نتعلم الأرقام من 1 إلى 5 مع أغنية (Five Little Ducks).
+                </div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('One')"><span class="emoji-huge">1️⃣</span><div class="word-en">One</div></div>
+                    <div class="card-item" onclick="speak('Two')"><span class="emoji-huge">2️⃣</span><div class="word-en">Two</div></div>
+                    <div class="card-item" onclick="speak('Three')"><span class="emoji-huge">3️⃣</span><div class="word-en">Three</div></div>
+                    <div class="card-item" onclick="speak('Four')"><span class="emoji-huge">4️⃣</span><div class="word-en">Four</div></div>
+                    <div class="card-item" onclick="speak('Five')"><span class="emoji-huge">5️⃣</span><div class="word-en">Five</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Page 8: My Robot (Body & Colors)</span>
+                <span>الصفحة 8</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">🎨</span>
+                    <strong>شامل:</strong> هنا تجد جميع الألوان وجميع أجزاء الجسم المذكورة في المنهج. اطلب من التلميذ الإشارة لجسمه عند السماع.
+                </div>
+
+                <h3 style="font-size:1.8rem; margin-bottom:20px; border-bottom:3px solid #eee; padding-bottom:10px;">👤 Body Parts (أجزاء الجسم)</h3>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Head')"><span class="emoji-huge">🗣️</span><div class="word-en">Head</div><div class="word-ar">رأس</div></div>
+                    <div class="card-item" onclick="speak('Eye')"><span class="emoji-huge">👁️</span><div class="word-en">Eye</div><div class="word-ar">عين</div></div>
+                    <div class="card-item" onclick="speak('Nose')"><span class="emoji-huge">👃</span><div class="word-en">Nose</div><div class="word-ar">أنف</div></div>
+                    <div class="card-item" onclick="speak('Mouth')"><span class="emoji-huge">👄</span><div class="word-en">Mouth</div><div class="word-ar">فم</div></div>
+                    <div class="card-item" onclick="speak('Ear')"><span class="emoji-huge">👂</span><div class="word-en">Ear</div><div class="word-ar">أذن</div></div>
+                    <div class="card-item" onclick="speak('Hand')"><span class="emoji-huge">✋</span><div class="word-en">Hand</div><div class="word-ar">يد</div></div>
+                    <div class="card-item" onclick="speak('Body')"><span class="emoji-huge">👕</span><div class="word-en">Body</div><div class="word-ar">جسم</div></div>
+                    <div class="card-item" onclick="speak('Leg')"><span class="emoji-huge">🦵</span><div class="word-en">Leg</div><div class="word-ar">ساق</div></div>
+                    <div class="card-item" onclick="speak('Foot')"><span class="emoji-huge">🦶</span><div class="word-en">Foot</div><div class="word-ar">قدم</div></div>
+                </div>
+
+                <h3 style="font-size:1.8rem; margin-top:50px; margin-bottom:20px; border-bottom:3px solid #eee; padding-bottom:10px;">🎨 Colors (جميع الألوان)</h3>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Red')"><span class="color-circle" style="background:red;"></span><div class="word-en">Red</div><div class="word-ar">أحمر</div></div>
+                    <div class="card-item" onclick="speak('Blue')"><span class="color-circle" style="background:blue;"></span><div class="word-en">Blue</div><div class="word-ar">أزرق</div></div>
+                    <div class="card-item" onclick="speak('Green')"><span class="color-circle" style="background:green;"></span><div class="word-en">Green</div><div class="word-ar">أخضر</div></div>
+                    <div class="card-item" onclick="speak('Yellow')"><span class="color-circle" style="background:gold;"></span><div class="word-en">Yellow</div><div class="word-ar">أصفر</div></div>
+                    <div class="card-item" onclick="speak('Pink')"><span class="color-circle" style="background:hotpink;"></span><div class="word-en">Pink</div><div class="word-ar">وردي</div></div>
+                    <div class="card-item" onclick="speak('Orange')"><span class="color-circle" style="background:orange;"></span><div class="word-en">Orange</div><div class="word-ar">برتقالي</div></div>
+                    <div class="card-item" onclick="speak('Black')"><span class="color-circle" style="background:black;"></span><div class="word-en">Black</div><div class="word-ar">أسود</div></div>
+                    <div class="card-item" onclick="speak('White')"><span class="color-circle" style="background:white; border:1px solid #ccc;"></span><div class="word-en">White</div><div class="word-ar">أبيض</div></div>
+                    <div class="card-item" onclick="speak('Brown')"><span class="color-circle" style="background:saddlebrown;"></span><div class="word-en">Brown</div><div class="word-ar">بني</div></div>
+                    <div class="card-item" onclick="speak('Grey')"><span class="color-circle" style="background:grey;"></span><div class="word-en">Grey</div><div class="word-ar">رصاصي</div></div>
+                    <div class="card-item" onclick="speak('Purple')"><span class="color-circle" style="background:purple;"></span><div class="word-en">Purple</div><div class="word-ar">بنفسجي</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Page 9: How are you?</span>
+                <span>الصفحة 9</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">👋</span>
+                    التحية والسؤال عن الحال. وأغنية (Clap your hands).
+                </div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('How are you?')"><span class="emoji-huge">🤔</span><div class="word-en">How are you?</div><div class="word-ar">كيف حالك؟</div></div>
+                    <div class="card-item" onclick="speak('I am fine')"><span class="emoji-huge">🙂</span><div class="word-en">I'm fine</div><div class="word-ar">بخير</div></div>
+                    <div class="card-item" onclick="speak('Clap your hands')"><span class="emoji-huge">👏</span><div class="word-en">Clap hands</div><div class="word-ar">صفق بيديك</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Pages 10-11: The Park</span>
+                <span>الصفحة 10-11</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">🌳</span>
+                    العد داخل الحديقة. واستخدام السؤال: <strong>Is there a...?</strong> (هل يوجد...؟) والجواب بـ Yes أو No.
+                </div>
+                <div class="dialogue-row" onclick="speak('How many boys?')">
+                    <span style="font-size:3rem;">👦</span>
+                    <div>
+                        <div class="word-en">How many boys?</div>
+                        <div class="word-ar">كم عدد الأولاد؟</div>
+                    </div>
+                </div>
+                <div class="dialogue-row" onclick="speak('Is there a kite?')">
+                    <span style="font-size:3rem;">🪁</span>
+                    <div>
+                        <div class="word-en">Is there a kite?</div>
+                        <div class="word-ar">هل توجد طائرة ورقية؟</div>
+                    </div>
+                </div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Yes, there is')"><span class="emoji-huge">✅</span><div class="word-en">Yes</div></div>
+                    <div class="card-item" onclick="speak('No, there is not')"><span class="emoji-huge">❌</span><div class="word-en">No</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-blue">
+                <span>Page 12: Toy Maker</span>
+                <span>الصفحة 12</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">👴</span>
+                    قصة صانع الألعاب (Toy Maker) ومراجعة الحروف من A إلى M.
+                </div>
+                <div class="card-item" onclick="speak('The Toy Maker')">
+                    <span class="emoji-huge">🧸🔧</span>
+                    <div class="word-en">The Toy Maker</div>
+                    <div class="word-ar">قصة صانع الألعاب</div>
+                </div>
+                <h3 style="text-align:center; margin-top:30px;">مراجعة الحروف:</h3>
+                <div class="grid-huge" style="grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));">
+                    <button class="card-item" onclick="speak('A')">A</button>
+                    <button class="card-item" onclick="speak('B')">B</button>
+                    <button class="card-item" onclick="speak('C')">C</button>
+                    <button class="card-item" onclick="speak('D')">D</button>
+                    <button class="card-item" onclick="speak('E')">E</button>
+                    <button class="card-item" onclick="speak('F')">F</button>
+                    <button class="card-item" onclick="speak('G')">G</button>
+                    <button class="card-item" onclick="speak('H')">H</button>
+                    <button class="card-item" onclick="speak('I')">I</button>
+                    <button class="card-item" onclick="speak('J')">J</button>
+                    <button class="card-item" onclick="speak('K')">K</button>
+                    <button class="card-item" onclick="speak('L')">L</button>
+                    <button class="card-item" onclick="speak('M')">M</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="phonics" class="content-section">
-        <div class="tracing-box">
-            <h3>Activity Book (Page 2)</h3>
-            <p>دعنا نتعلم حرف <strong>Aa</strong></p>
-            
-            <div class="letter-big">Aa</div>
-            <button onclick="speak('A, Apple, Ant')" style="padding: 10px 20px; background: var(--main); color: white; border: none; border-radius: 20px; font-size: 1.2rem; margin-top: 10px;">🔊 استمع للنطق</button>
+    <div id="activity-view" class="section-view">
+        <div class="internal-nav">
+            <button onclick="goBack()" class="back-small">⬅️ رجوع للاختيار</button>
+        </div>
 
-            <div class="word-list">
-                <div class="word-item" onclick="speak('Apple')">🍎 <strong>A</strong>pple (تفاحة)</div>
-                <div class="word-item" onclick="speak('Ant')">🐜 <strong>A</strong>nt (نملة)</div>
+        <h2 style="text-align:center; color:var(--ab-color); margin: 30px 0;">Activity Book Exercises</h2>
+
+        <div class="page-block">
+            <div class="page-header ph-orange">
+                <span>Page 2: Letter Aa</span>
+                <span>كتاب النشاط ص2</span>
+            </div>
+            <div class="page-body">
+                <div class="note-box">
+                    <span class="note-icon">✍️</span>
+                    <strong>المطلوب:</strong> تتبع حرف (a) ولفظ الكلمات التي تبدأ به.
+                </div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('A. Apple')"><span class="emoji-huge">🍎</span><div class="word-en">Apple</div><div class="word-ar">تفاحة</div></div>
+                    <div class="card-item" onclick="speak('A. Ant')"><span class="emoji-huge">🐜</span><div class="word-en">Ant</div><div class="word-ar">نملة</div></div>
+                </div>
             </div>
         </div>
+
+        <div class="page-block">
+            <div class="page-header ph-orange">
+                <span>Letter Bb</span>
+                <span>تمرين حرف B</span>
+            </div>
+            <div class="page-body">
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('B. Ball')"><span class="emoji-huge">⚽</span><div class="word-en">Ball</div></div>
+                    <div class="card-item" onclick="speak('B. Bus')"><span class="emoji-huge">🚌</span><div class="word-en">Bus</div></div>
+                    <div class="card-item" onclick="speak('B. Bird')"><span class="emoji-huge">🐦</span><div class="word-en">Bird</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-orange">
+                <span>Letter Cc</span>
+                <span>تمرين حرف C</span>
+            </div>
+            <div class="page-body">
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('C. Car')"><span class="emoji-huge">🚗</span><div class="word-en">Car</div></div>
+                    <div class="card-item" onclick="speak('C. Cat')"><span class="emoji-huge">🐈</span><div class="word-en">Cat</div></div>
+                    <div class="card-item" onclick="speak('C. Cake')"><span class="emoji-huge">🍰</span><div class="word-en">Cake</div></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div id="quiz" class="content-section">
-        <h3>اختبر معلوماتك! 🌟</h3>
-        
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">1. ما معنى "Hello"?</div>
-            <div class="quiz-options">
-                <button onclick="checkAnswer(this, false)">مع السلامة</button>
-                <button onclick="checkAnswer(this, true)">مرحباً</button>
-                <button onclick="checkAnswer(this, false)">شكراً</button>
-            </div>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">2. (للمذكر) This is ..... book.</div>
-            <div class="quiz-options">
-                <button onclick="checkAnswer(this, true)">his</button>
-                <button onclick="checkAnswer(this, false)">her</button>
-            </div>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">3. ما هذا الرقم: 3 ؟</div>
-            <div class="quiz-options">
-                <button onclick="checkAnswer(this, false)">Five</button>
-                <button onclick="checkAnswer(this, false)">One</button>
-                <button onclick="checkAnswer(this, true)">Three</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="toast" class="speak-hint">🔊 جاري النطق...</div>
+    <div id="toast" class="toast">🔊 جاري النطق...</div>
 
     <script>
-        // --- 1. Tab System Logic ---
-        function openTab(tabId) {
-            // Hide all contents
-            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
-            // Remove active class from buttons
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            // Show selected
-            document.getElementById(tabId).classList.add('active');
-            // Highlight button (Need to find the specific button, simplified here by event usage usually, but we'll loop)
-            const btns = document.querySelectorAll('.tab-btn');
-            if(tabId === 'lesson') btns[0].classList.add('active');
-            if(tabId === 'grammar') btns[1].classList.add('active');
-            if(tabId === 'phonics') btns[2].classList.add('active');
-            if(tabId === 'quiz') btns[3].classList.add('active');
+        // --- Navigation ---
+        function openBook(type) {
+            document.getElementById('menu-view').classList.remove('active');
+            if (type === 'student') {
+                document.getElementById('student-view').classList.add('active');
+            } else {
+                document.getElementById('activity-view').classList.add('active');
+            }
+            window.scrollTo(0, 0);
         }
 
-        // --- 2. Audio System (Android Optimized) ---
+        function goBack() {
+            document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
+            document.getElementById('menu-view').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // --- Text to Speech (English) ---
         let currentUtterance = null;
-
         function speak(text) {
-            // Show visual feedback
             const toast = document.getElementById('toast');
-            toast.style.opacity = 1;
-            setTimeout(() => toast.style.opacity = 0, 1500);
+            toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1500);
 
-            // Cancel previous
             window.speechSynthesis.cancel();
-
             currentUtterance = new SpeechSynthesisUtterance(text);
             currentUtterance.lang = 'en-US'; 
             currentUtterance.rate = 0.85; 
             currentUtterance.pitch = 1.1;
 
-            // Voice selection fix
             let voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                let englishVoice = voices.find(v => v.lang.includes('en'));
-                if (englishVoice) currentUtterance.voice = englishVoice;
-            }
-
-            window.speechSynthesis.speak(currentUtterance);
+            let enVoice = voices.find(v => v.lang.includes('en'));
+            if(enVoice) currentUtterance.voice = enVoice;
             
-            // Cleanup
-            currentUtterance.onend = function() { currentUtterance = null; };
+            window.speechSynthesis.speak(currentUtterance);
         }
-
-        // Initialize voices
-        window.speechSynthesis.onvoiceschanged = function() {
-            window.speechSynthesis.getVoices();
-        };
-
-        // --- 3. Quiz Logic ---
-        function checkAnswer(btn, isCorrect) {
-            if(isCorrect) {
-                btn.classList.add('correct');
-                btn.textContent += " ✅ (أحسنت!)";
-                speak("Good job!");
-            } else {
-                btn.classList.add('wrong');
-                btn.textContent += " ❌ (حاول مرة أخرى)";
-                speak("Try again");
-            }
-            // Disable siblings to prevent multiple guesses (optional)
-            // const parent = btn.parentElement;
-            // const siblings = parent.querySelectorAll('button');
-            // siblings.forEach(b => b.disabled = true);
-        }
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
     </script>
+
 </body>
 </html>

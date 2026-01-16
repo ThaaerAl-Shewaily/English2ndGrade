@@ -3,238 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 3: My Bedroom & House | أ. ثائر الشويلي</title>
+    <title>الوحدة الثالثة: منزلي | أ. ثائر الشويلي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
-
-        :root {
-            --main: #9b59b6; /* لون بنفسجي يناسب الغرف */
-            --bg: #f3e5f5;
-            --text: #2c3e50;
-        }
-
-        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 80px; color: var(--text); }
+        /* نفس التنسيق الأساسي لضمان التوحيد */
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Tajawal:wght@500;800&display=swap');
+        :root { --sb-color: #8e44ad; --ab-color: #d35400; --bg-color: #fcfbfd; --text-dark: #2c3e50; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg-color); margin: 0; padding-bottom: 100px; color: var(--text-dark); }
         
-        /* Nav */
-        .top-nav { background: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-bottom: 3px solid var(--main); position: sticky; top: 0; z-index: 100; }
-        .home-btn { text-decoration: none; background: var(--text); color: white; padding: 8px 15px; border-radius: 20px; }
-        h2 { margin: 0; color: var(--main); }
-
-        /* Tabs */
-        .tabs { display: flex; overflow-x: auto; background: white; padding: 10px; gap: 10px; }
-        .tab-btn { background: #eee; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-family: 'Tajawal'; font-weight: bold; }
-        .tab-btn.active { background: var(--main); color: white; }
-
-        /* Content */
-        .content-section { display: none; padding: 20px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s; }
-        .content-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Vocab Cards */
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .card { background: white; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; border-bottom: 4px solid #ddd; transition: 0.2s; }
-        .card:active { transform: scale(0.95); border-bottom: 2px solid #ddd; }
-        .card-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
-        .card-text { font-family: 'Fredoka'; font-weight: bold; font-size: 1.1rem; }
-
-        /* Preposition Game Style */
-        .prep-box { background: white; padding: 20px; border-radius: 20px; text-align: center; margin-top: 20px; border: 2px dashed var(--main); }
-        .prep-visual { font-size: 5rem; margin: 20px 0; }
+        .main-header { background: linear-gradient(135deg, #8e44ad, #9b59b6); color: white; padding: 25px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .back-btn-fixed { position: absolute; top: 25px; right: 20px; background: rgba(255,255,255,0.25); color: white; text-decoration: none; padding: 10px 25px; border-radius: 30px; border: 2px solid white; font-weight: bold; }
         
-        /* Phonics */
-        .letter-row { display: flex; align-items: center; gap: 20px; background: white; padding: 15px; margin-bottom: 10px; border-radius: 15px; cursor: pointer; }
-        .big-letter { font-family: 'Fredoka'; font-size: 3rem; color: var(--main); font-weight: bold; width: 60px; }
-        
-        /* Quiz */
-        .quiz-opt { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #ddd; background: white; border-radius: 10px; font-size: 1.1rem; cursor: pointer; font-family: 'Fredoka'; }
-        .correct { background: #2ecc71 !important; color: white; }
-        .wrong { background: #e74c3c !important; color: white; }
+        .section-view { display: none; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .section-view.active { display: block; animation: slideUp 0.6s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Toast */
-        .speak-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 30px; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .hero-menu { display: flex; flex-direction: column; gap: 30px; margin-top: 50px; align-items: center; }
+        .big-btn { width: 90%; max-width: 600px; padding: 45px; border-radius: 35px; border: none; cursor: pointer; text-align: center; font-size: 2.2rem; font-weight: 800; font-family: 'Tajawal'; color: white; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transition: transform 0.2s; }
+        .big-btn:hover { transform: scale(1.02); }
+        .btn-purple { background: linear-gradient(135deg, #8e44ad, #be90d4); }
+        .btn-orange { background: linear-gradient(135deg, #e67e22, #d35400); }
+        
+        .page-block { background: white; border-radius: 30px; margin-bottom: 60px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow: hidden; border: 4px solid #eee; }
+        .page-header { padding: 25px 40px; font-size: 2rem; font-weight: bold; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .ph-purple { background: var(--sb-color); }
+        .ph-orange { background: var(--ab-color); }
+        .page-body { padding: 40px; }
+        
+        .note-box { background: #f3e5f5; border: 3px solid #e1bee7; border-right: 10px solid #8e44ad; padding: 30px; border-radius: 20px; margin-bottom: 40px; font-size: 1.4rem; line-height: 1.8; color: #4a148c; }
+        
+        .grid-huge { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+        .card-item { background: white; border: 4px solid #f1f1f1; border-radius: 30px; padding: 30px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .card-item:hover { border-color: var(--sb-color); background: #fdfbff; transform: translateY(-10px); }
+        .emoji-huge { font-size: 6rem; display: block; margin-bottom: 20px; }
+        .word-en { font-family: 'Fredoka'; font-size: 2.5rem; font-weight: 700; color: #2c3e50; }
+        .word-ar { font-size: 1.6rem; color: #7f8c8d; margin-top: 10px; font-weight: bold; }
+
+        .internal-nav { padding: 20px 0; }
+        .back-small { background: #34495e; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 1.3rem; cursor: pointer; font-family: 'Tajawal'; }
+        .toast { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: white; padding: 20px 50px; border-radius: 60px; font-size: 1.4rem; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000; }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <a href="index.html" class="home-btn">🏠 القائمة</a>
-        <h2>Unit 3: My House</h2>
-        <div></div>
+    <div class="main-header">
+        <h1>Unit 3: My House (منزلي وغرفتي)</h1>
+        <a href="index.html" class="back-btn-fixed">🏠 الرئيسية</a>
     </div>
 
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('rooms')">🏡 House (المنزل)</button>
-        <button class="tab-btn" onclick="openTab('bedroom')">🛏️ Bedroom (غرفتي)</button>
-        <button class="tab-btn" onclick="openTab('prep')">📍 Prepositions (أين؟)</button>
-        <button class="tab-btn" onclick="openTab('phonics')">🔤 Phonics (Cc/Dd)</button>
-        <button class="tab-btn" onclick="openTab('quiz')">📝 Quiz (اختبار)</button>
-    </div>
-
-    <div id="rooms" class="content-section active">
-        <h3 style="text-align: center; color: var(--main);">Parts of the House</h3>
-        <div class="grid-cards">
-            <div class="card" onclick="speak('Kitchen')">
-                <span class="card-icon">🍳</span>
-                <span class="card-text">Kitchen</span>
-                <div style="font-size:0.8rem; color:#888;">مطبخ</div>
-            </div>
-            <div class="card" onclick="speak('Bathroom')">
-                <span class="card-icon">🛁</span>
-                <span class="card-text">Bathroom</span>
-                <div style="font-size:0.8rem; color:#888;">حمام</div>
-            </div>
-            <div class="card" onclick="speak('Sitting room')">
-                <span class="card-icon">🛋️</span>
-                <span class="card-text">Sitting room</span>
-                <div style="font-size:0.8rem; color:#888;">غرفة الجلوس</div>
-            </div>
-            <div class="card" onclick="speak('Bedroom')">
-                <span class="card-icon">🛏️</span>
-                <span class="card-text">Bedroom</span>
-                <div style="font-size:0.8rem; color:#888;">غرفة النوم</div>
-            </div>
-            <div class="card" onclick="speak('Garden')">
-                <span class="card-icon">🌳</span>
-                <span class="card-text">Garden</span>
-                <div style="font-size:0.8rem; color:#888;">حديقة</div>
-            </div>
+    <div id="menu-view" class="section-view active">
+        <div class="hero-menu">
+            <button onclick="openBook('student')" class="big-btn btn-purple">📘 كتاب الطالب (Student's Book)</button>
+            <button onclick="openBook('activity')" class="big-btn btn-orange">📙 كتاب النشاط (Activity Book)</button>
         </div>
     </div>
 
-    <div id="bedroom" class="content-section">
-        <h3 style="text-align: center; color: var(--main);">In My Bedroom</h3>
-        <div class="grid-cards">
-            <div class="card" onclick="speak('Bed')">
-                <span class="card-icon">🛏️</span>
-                <span class="card-text">Bed</span>
+    <div id="student-view" class="section-view">
+        <div class="internal-nav"><button onclick="goBack()" class="back-small">⬅️ رجوع</button></div>
+
+        <div class="page-block">
+            <div class="page-header ph-purple"><span>My House</span><span>أجزاء المنزل</span></div>
+            <div class="page-body">
+                <div class="note-box">💡 <strong>المفردات:</strong> نتعلم أسماء الغرف في المنزل.</div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Kitchen')"><span class="emoji-huge">🍳</span><div class="word-en">Kitchen</div><div class="word-ar">مطبخ</div></div>
+                    <div class="card-item" onclick="speak('Bathroom')"><span class="emoji-huge">🛁</span><div class="word-en">Bathroom</div><div class="word-ar">حمام</div></div>
+                    <div class="card-item" onclick="speak('Bedroom')"><span class="emoji-huge">🛏️</span><div class="word-en">Bedroom</div><div class="word-ar">غرفة نوم</div></div>
+                    <div class="card-item" onclick="speak('Sitting room')"><span class="emoji-huge">🛋️</span><div class="word-en">Sitting room</div><div class="word-ar">غرفة جلوس</div></div>
+                    <div class="card-item" onclick="speak('Garden')"><span class="emoji-huge">🌳</span><div class="word-en">Garden</div><div class="word-ar">حديقة</div></div>
+                </div>
             </div>
-            <div class="card" onclick="speak('Wardrobe')">
-                <span class="card-icon">🚪</span>
-                <span class="card-text">Wardrobe</span>
-                <div style="font-size:0.8rem; color:#888;">خزانة ملابس</div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-purple"><span>My Bedroom</span><span>محتويات غرفتي</span></div>
+            <div class="page-body">
+                <div class="note-box">💡 <strong>المفردات:</strong> أسماء الأشياء الموجودة داخل غرفة النوم.</div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Bed')"><span class="emoji-huge">🛏️</span><div class="word-en">Bed</div><div class="word-ar">سرير</div></div>
+                    <div class="card-item" onclick="speak('Wardrobe')"><span class="emoji-huge">🚪</span><div class="word-en">Wardrobe</div><div class="word-ar">خزانة ملابس</div></div>
+                    <div class="card-item" onclick="speak('Shelf')"><span class="emoji-huge">📚</span><div class="word-en">Shelf</div><div class="word-ar">رف</div></div>
+                    <div class="card-item" onclick="speak('Lamp')"><span class="emoji-huge">💡</span><div class="word-en">Lamp</div><div class="word-ar">مصباح</div></div>
+                    <div class="card-item" onclick="speak('Bin')"><span class="emoji-huge">🗑️</span><div class="word-en">Bin</div><div class="word-ar">سلة مهملات</div></div>
+                </div>
             </div>
-            <div class="card" onclick="speak('Shelf')">
-                <span class="card-icon">📚</span>
-                <span class="card-text">Shelf</span>
-                <div style="font-size:0.8rem; color:#888;">رف</div>
-            </div>
-            <div class="card" onclick="speak('Lamp')">
-                <span class="card-icon">🛋️</span>
-                <span class="card-text">Lamp</span>
-                <div style="font-size:0.8rem; color:#888;">مصباح</div>
-            </div>
-            <div class="card" onclick="speak('Bin')">
-                <span class="card-icon">🗑️</span>
-                <span class="card-text">Bin</span>
-                <div style="font-size:0.8rem; color:#888;">سلة مهملات</div>
-            </div>
-             <div class="card" onclick="speak('Floor')">
-                <span class="card-icon">⬇️</span>
-                <span class="card-text">Floor</span>
-                <div style="font-size:0.8rem; color:#888;">أرضية</div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-purple"><span>Prepositions (حروف الجر)</span><span>Where? (أين)</span></div>
+            <div class="page-body">
+                <div class="note-box">📍 <strong>قاعدة:</strong> للسؤال عن المكان نستخدم <strong>Where is...?</strong>. الجواب يكون باستخدام (In, On, Under).</div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('The ball is In the box')">
+                        <span class="emoji-huge">📦⚽</span>
+                        <div class="word-en">IN</div>
+                        <div class="word-ar">في (داخل)</div>
+                    </div>
+                    <div class="card-item" onclick="speak('The ball is On the box')">
+                        <span class="emoji-huge">📦👆⚽</span>
+                        <div class="word-en">ON</div>
+                        <div class="word-ar">على (فوق)</div>
+                    </div>
+                    <div class="card-item" onclick="speak('The ball is Under the box')">
+                        <span class="emoji-huge">📦👇⚽</span>
+                        <div class="word-en">UNDER</div>
+                        <div class="word-ar">تحت</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="prep" class="content-section">
-        <div style="background: #e1f5fe; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-            <p><strong>قاعدة (Where):</strong> نستخدم حروف الجر لنجيب على سؤال "أين؟"</p>
-        </div>
-
-        <div class="prep-box" onclick="speak('The ball is In the box')">
-            <h3>In (في / داخل)</h3>
-            <div class="prep-visual">📦⚽</div>
-            <p style="font-family:'Fredoka';">The ball is <strong>IN</strong> the box.</p>
-        </div>
-
-        <div class="prep-box" onclick="speak('The ball is On the box')">
-            <h3>On (على / فوق)</h3>
-            <div class="prep-visual">📦🏀</div>
-            <style>.prep-visual { position: relative; } </style>
-            <p style="font-family:'Fredoka';">The ball is <strong>ON</strong> the box.</p>
-        </div>
-
-        <div class="prep-box" onclick="speak('The ball is Under the box')">
-            <h3>Under (تحت)</h3>
-            <div class="prep-visual">📦<br>🥎</div>
-            <p style="font-family:'Fredoka';">The ball is <strong>UNDER</strong> the box.</p>
-        </div>
-    </div>
-
-    <div id="phonics" class="content-section">
-        <h3>Letters Cc & Dd</h3>
-        
-        <div class="letter-row" onclick="speak('C. Car. Cat. Cake.')">
-            <div class="big-letter">Cc</div>
-            <div>
-                <div style="font-family:'Fredoka'; font-size:1.2rem;">Car 🚗 | Cat 🐈 | Cake 🍰</div>
-                <div style="font-size:0.9rem; color:#777;">ينطق "ك" غالباً</div>
-            </div>
-        </div>
-
-        <div class="letter-row" onclick="speak('D. Duck. Dog. Date.')">
-            <div class="big-letter">Dd</div>
-            <div>
-                <div style="font-family:'Fredoka'; font-size:1.2rem;">Duck 🦆 | Dog 🐕 | Date 🌴</div>
+    <div id="activity-view" class="section-view">
+        <div class="internal-nav"><button onclick="goBack()" class="back-small">⬅️ رجوع</button></div>
+        <div class="page-block">
+            <div class="page-header ph-orange"><span>Letters C, D, E</span></div>
+            <div class="page-body">
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('C. Cat')"><span class="emoji-huge">🐈</span><div class="word-en">Cat</div></div>
+                    <div class="card-item" onclick="speak('D. Duck')"><span class="emoji-huge">🦆</span><div class="word-en">Duck</div></div>
+                    <div class="card-item" onclick="speak('E. Egg')"><span class="emoji-huge">🥚</span><div class="word-en">Egg</div></div>
+                    <div class="card-item" onclick="speak('E. Elephant')"><span class="emoji-huge">🐘</span><div class="word-en">Elephant</div></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="quiz" class="content-section">
-        <h3>اختبر ذكائك 🧠</h3>
-        
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">1. أين ننام؟ (Where do we sleep?)</div>
-            <button class="quiz-opt" onclick="check(this, false)">In the kitchen</button>
-            <button class="quiz-opt" onclick="check(this, true)">In the bedroom</button>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">2. معنى كلمة "Wardrobe"؟</div>
-            <button class="quiz-opt" onclick="check(this, true)">خزانة ملابس</button>
-            <button class="quiz-opt" onclick="check(this, false)">سرير</button>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">3. الكرة "تحت" الطاولة. (The ball is .... the table)</div>
-            <button class="quiz-opt" onclick="check(this, false)">On</button>
-            <button class="quiz-opt" onclick="check(this, true)">Under</button>
-            <button class="quiz-opt" onclick="check(this, false)">In</button>
-        </div>
-    </div>
-
-    <div id="toast" class="speak-hint">🔊 جاري النطق...</div>
-
+    <div id="toast" class="toast">🔊 جاري النطق...</div>
     <script>
-        function openTab(id) {
-            document.querySelectorAll('.content-section').forEach(e => e.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            
-            // Highlight logic
-            const map = {'rooms':0, 'bedroom':1, 'prep':2, 'phonics':3, 'quiz':4};
-            document.querySelectorAll('.tab-btn')[map[id]].classList.add('active');
-        }
-
-        // Android-Safe Audio
-        let currentUtterance = null;
+        function openBook(type) { document.getElementById('menu-view').classList.remove('active'); document.getElementById(type+'-view').classList.add('active'); window.scrollTo(0,0); }
+        function goBack() { document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active')); document.getElementById('menu-view').classList.add('active'); window.scrollTo(0,0); }
         function speak(text) {
-            const toast = document.getElementById('toast');
-            toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1500);
+            const t = document.getElementById('toast'); t.style.opacity=1; setTimeout(()=>t.style.opacity=0, 1500);
             window.speechSynthesis.cancel();
-            currentUtterance = new SpeechSynthesisUtterance(text);
-            currentUtterance.lang = 'en-US';
-            currentUtterance.rate = 0.85;
-            let voices = window.speechSynthesis.getVoices();
-            let enVoice = voices.find(v => v.lang.includes('en'));
-            if(enVoice) currentUtterance.voice = enVoice;
-            window.speechSynthesis.speak(currentUtterance);
-        }
-        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-
-        function check(btn, isOk) {
-            if(isOk) { btn.classList.add('correct'); speak('Correct!'); }
-            else { btn.classList.add('wrong'); speak('Try again'); }
+            const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85; 
+            window.speechSynthesis.speak(u);
         }
     </script>
 </body>

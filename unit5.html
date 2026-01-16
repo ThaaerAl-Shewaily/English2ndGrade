@@ -3,241 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 5: Clothes | أ. ثائر الشويلي</title>
+    <title>الوحدة الخامسة: الملابس | أ. ثائر الشويلي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Tajawal:wght@500;800&display=swap');
-
-        :root {
-            --main: #e84393; /* لون وردي غامق للملابس */
-            --bg: #fce4ec;
-            --text: #2c3e50;
-        }
-
-        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 80px; color: var(--text); }
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Tajawal:wght@500;800&display=swap');
+        :root { --sb-color: #e84393; --ab-color: #d35400; --bg-color: #fff0f6; --text-dark: #2c3e50; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg-color); margin: 0; padding-bottom: 100px; color: var(--text-dark); }
         
-        .top-nav { background: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-bottom: 3px solid var(--main); position: sticky; top: 0; z-index: 100; }
-        .home-btn { text-decoration: none; background: var(--text); color: white; padding: 8px 15px; border-radius: 20px; }
-        h2 { margin: 0; color: var(--main); }
+        .main-header { background: linear-gradient(135deg, #e84393, #fd79a8); color: white; padding: 25px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .back-btn-fixed { position: absolute; top: 25px; right: 20px; background: rgba(255,255,255,0.25); color: white; text-decoration: none; padding: 10px 25px; border-radius: 30px; border: 2px solid white; font-weight: bold; }
+        
+        .section-view { display: none; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .section-view.active { display: block; animation: slideUp 0.6s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-        .tabs { display: flex; overflow-x: auto; background: white; padding: 10px; gap: 10px; }
-        .tab-btn { background: #eee; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-family: 'Tajawal'; font-weight: bold; }
-        .tab-btn.active { background: var(--main); color: white; }
+        .hero-menu { display: flex; flex-direction: column; gap: 30px; margin-top: 50px; align-items: center; }
+        .big-btn { width: 90%; max-width: 600px; padding: 45px; border-radius: 35px; border: none; cursor: pointer; text-align: center; font-size: 2.2rem; font-weight: 800; font-family: 'Tajawal'; color: white; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transition: transform 0.2s; }
+        .big-btn:hover { transform: scale(1.02); }
+        .btn-pink { background: linear-gradient(135deg, #e84393, #a29bfe); }
+        .btn-orange { background: linear-gradient(135deg, #e67e22, #d35400); }
+        
+        .page-block { background: white; border-radius: 30px; margin-bottom: 60px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow: hidden; border: 4px solid #eee; }
+        .page-header { padding: 25px 40px; font-size: 2rem; font-weight: bold; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .ph-pink { background: var(--sb-color); }
+        .ph-orange { background: var(--ab-color); }
+        .page-body { padding: 40px; }
+        
+        .note-box { background: #fce4ec; border: 3px solid #f8bbd0; border-right: 10px solid #e84393; padding: 30px; border-radius: 20px; margin-bottom: 40px; font-size: 1.4rem; line-height: 1.8; color: #880e4f; }
+        
+        .grid-huge { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+        .card-item { background: white; border: 4px solid #f1f1f1; border-radius: 30px; padding: 30px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .card-item:hover { border-color: var(--sb-color); background: #fff5f8; transform: translateY(-10px); }
+        .emoji-huge { font-size: 6rem; display: block; margin-bottom: 20px; }
+        .word-en { font-family: 'Fredoka'; font-size: 2.5rem; font-weight: 700; color: #2c3e50; }
+        .word-ar { font-size: 1.6rem; color: #7f8c8d; margin-top: 10px; font-weight: bold; }
 
-        .content-section { display: none; padding: 20px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s; }
-        .content-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .card { background: white; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; border-bottom: 4px solid #ddd; transition: 0.2s; position: relative; overflow: hidden; }
-        .card:hover { transform: translateY(-5px); border-bottom-color: var(--main); }
-        .card-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
-        .card-text { font-family: 'Fredoka'; font-weight: bold; font-size: 1.1rem; }
-
-        /* Comparison Box */
-        .comp-box { background: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: space-around; align-items: center; cursor: pointer; border: 2px solid transparent; }
-        .comp-box:hover { border-color: var(--main); }
-        .comp-item { text-align: center; }
-        .comp-img { display: block; margin-bottom: 5px; }
-
-        /* Color Circle */
-        .color-dot { width: 30px; height: 30px; border-radius: 50%; display: inline-block; margin-top: 5px; border: 2px solid rgba(0,0,0,0.1); }
-
-        /* Quiz */
-        .quiz-opt { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #ddd; background: white; border-radius: 10px; font-size: 1.1rem; cursor: pointer; font-family: 'Fredoka'; }
-        .correct { background: #2ecc71 !important; color: white; }
-        .wrong { background: #e74c3c !important; color: white; }
-
-        /* Phonics */
-        .letter-row { display: flex; align-items: center; gap: 20px; background: white; padding: 15px; margin-bottom: 10px; border-radius: 15px; cursor: pointer; }
-        .big-letter { font-family: 'Fredoka'; font-size: 3rem; color: var(--main); font-weight: bold; width: 60px; }
-
-        .speak-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 30px; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .internal-nav { padding: 20px 0; }
+        .back-small { background: #34495e; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 1.3rem; cursor: pointer; font-family: 'Tajawal'; }
+        .toast { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: white; padding: 20px 50px; border-radius: 60px; font-size: 1.4rem; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000; }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <a href="index.html" class="home-btn">🏠 القائمة</a>
-        <h2>Unit 5: Clothes</h2>
-        <div></div>
+    <div class="main-header">
+        <h1>Unit 5: Clothes (الملابس)</h1>
+        <a href="index.html" class="back-btn-fixed">🏠 الرئيسية</a>
     </div>
 
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('clothes')">👗 Clothes (الملابس)</button>
-        <button class="tab-btn" onclick="openTab('sizes')">🐘 Sizes (الأحجام)</button>
-        <button class="tab-btn" onclick="openTab('phonics')">🔤 Phonics (H,I,J)</button>
-        <button class="tab-btn" onclick="openTab('quiz')">📝 Quiz (اختبار)</button>
+    <div id="menu-view" class="section-view active">
+        <div class="hero-menu">
+            <button onclick="openBook('student')" class="big-btn btn-pink">📘 كتاب الطالب (Student's Book)</button>
+            <button onclick="openBook('activity')" class="big-btn btn-orange">📙 كتاب النشاط (Activity Book)</button>
+        </div>
     </div>
 
-    <div id="clothes" class="content-section active">
-        <h3 style="text-align: center; color: var(--main);">My Wardrobe</h3>
-        <div class="grid-cards">
-            <div class="card" onclick="speak('Shirt')">
-                <span class="card-icon">👕</span>
-                <span class="card-text">Shirt</span>
-                <div style="font-size:0.8rem; color:#888;">قميص</div>
+    <div id="student-view" class="section-view">
+        <div class="internal-nav"><button onclick="goBack()" class="back-small">⬅️ رجوع</button></div>
+
+        <div class="page-block">
+            <div class="page-header ph-pink"><span>My Clothes</span><span>ملابسي</span></div>
+            <div class="page-body">
+                <div class="note-box">👕 <strong>المفردات:</strong> نتعلم أسماء الملابس المختلفة.</div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Shirt')"><span class="emoji-huge">👕</span><div class="word-en">Shirt</div><div class="word-ar">قميص</div></div>
+                    <div class="card-item" onclick="speak('Trousers')"><span class="emoji-huge">👖</span><div class="word-en">Trousers</div><div class="word-ar">بنطلون</div></div>
+                    <div class="card-item" onclick="speak('Skirt')"><span class="emoji-huge">👗</span><div class="word-en">Skirt</div><div class="word-ar">تنورة</div></div>
+                    <div class="card-item" onclick="speak('Dress')"><span class="emoji-huge">👚</span><div class="word-en">Dress</div><div class="word-ar">فستان</div></div>
+                    <div class="card-item" onclick="speak('Shoes')"><span class="emoji-huge">👞</span><div class="word-en">Shoes</div><div class="word-ar">حذاء</div></div>
+                    <div class="card-item" onclick="speak('Trainers')"><span class="emoji-huge">👟</span><div class="word-en">Trainers</div><div class="word-ar">حذاء رياضي</div></div>
+                    <div class="card-item" onclick="speak('Socks')"><span class="emoji-huge">🧦</span><div class="word-en">Socks</div><div class="word-ar">جوارب</div></div>
+                    <div class="card-item" onclick="speak('Hat')"><span class="emoji-huge">🧢</span><div class="word-en">Hat</div><div class="word-ar">قبعة</div></div>
+                </div>
             </div>
-            <div class="card" onclick="speak('Trousers')">
-                <span class="card-icon">👖</span>
-                <span class="card-text">Trousers</span>
-                <div style="font-size:0.8rem; color:#888;">بنطلون</div>
-            </div>
-            <div class="card" onclick="speak('Skirt')">
-                <span class="card-icon">👗</span>
-                <span class="card-text">Skirt</span>
-                <div style="font-size:0.8rem; color:#888;">تنورة</div>
-            </div>
-            <div class="card" onclick="speak('Dress')">
-                <span class="card-icon">👚</span>
-                <span class="card-text">Dress</span>
-                <div style="font-size:0.8rem; color:#888;">فستان</div>
-            </div>
-            <div class="card" onclick="speak('Shoes')">
-                <span class="card-icon">👞</span>
-                <span class="card-text">Shoes</span>
-                <div style="font-size:0.8rem; color:#888;">حذاء</div>
-            </div>
-            <div class="card" onclick="speak('Trainers')">
-                <span class="card-icon">👟</span>
-                <span class="card-text">Trainers</span>
-                <div style="font-size:0.8rem; color:#888;">حذاء رياضي</div>
-            </div>
-            <div class="card" onclick="speak('Hat')">
-                <span class="card-icon">🧢</span>
-                <span class="card-text">Hat</span>
-                <div style="font-size:0.8rem; color:#888;">قبعة</div>
-            </div>
-            <div class="card" onclick="speak('Socks')">
-                <span class="card-icon">🧦</span>
-                <span class="card-text">Socks</span>
-                <div style="font-size:0.8rem; color:#888;">جوارب</div>
+        </div>
+
+        <div class="page-block">
+            <div class="page-header ph-pink"><span>Sizes (الأحجام)</span><span>Big / Small</span></div>
+            <div class="page-body">
+                <div class="note-box">🐘 <strong>صفات:</strong> نتعلم التمييز بين الكبير والصغير، والطويل والقصير.</div>
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('Big')"><span class="emoji-huge">🐘</span><div class="word-en">Big</div><div class="word-ar">كبير</div></div>
+                    <div class="card-item" onclick="speak('Small')"><span class="emoji-huge">🐜</span><div class="word-en">Small</div><div class="word-ar">صغير</div></div>
+                    <div class="card-item" onclick="speak('Long')"><span class="emoji-huge">📏</span><div class="word-en">Long</div><div class="word-ar">طويل</div></div>
+                    <div class="card-item" onclick="speak('Short')"><span class="emoji-huge">✏️</span><div class="word-en">Short</div><div class="word-ar">قصير</div></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="sizes" class="content-section">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <p><strong>الصفات:</strong> نتعلم كيف نصف الأشياء (كبير/صغير/طويل/قصير)</p>
-        </div>
-
-        <div class="comp-box" onclick="speak('Big and Small')">
-            <div class="comp-item">
-                <span class="comp-img" style="font-size: 5rem;">🐘</span>
-                <span style="font-family:'Fredoka'; font-weight:bold; color:red;">Big</span>
-                <br>كبير
-            </div>
-            <div style="font-size: 2rem;">🆚</div>
-            <div class="comp-item">
-                <span class="comp-img" style="font-size: 2rem;">🐜</span>
-                <span style="font-family:'Fredoka'; font-weight:bold; color:green;">Small</span>
-                <br>صغير
-            </div>
-        </div>
-
-        <div class="comp-box" onclick="speak('Long and Short')">
-            <div class="comp-item">
-                <span class="comp-img" style="font-size: 4rem;">📏</span>
-                <span style="font-family:'Fredoka'; font-weight:bold; color:blue;">Long</span>
-                <br>طويل
-            </div>
-            <div style="font-size: 2rem;">🆚</div>
-            <div class="comp-item">
-                <span class="comp-img" style="font-size: 2rem;">✏️</span>
-                <span style="font-family:'Fredoka'; font-weight:bold; color:orange;">Short</span>
-                <br>قصير
-            </div>
-        </div>
-        
-        <h3 style="text-align: center; margin-top:30px;">Colors Review</h3>
-        <div class="grid-cards">
-            <div class="card" onclick="speak('Red shirt')">
-                <span class="color-dot" style="background:red;"></span>
-                <div class="card-text">Red Shirt</div>
-            </div>
-            <div class="card" onclick="speak('Blue shoes')">
-                <span class="color-dot" style="background:blue;"></span>
-                <div class="card-text">Blue Shoes</div>
+    <div id="activity-view" class="section-view">
+        <div class="internal-nav"><button onclick="goBack()" class="back-small">⬅️ رجوع</button></div>
+        <div class="page-block">
+            <div class="page-header ph-orange"><span>Letters H, I, J</span></div>
+            <div class="page-body">
+                <div class="grid-huge">
+                    <div class="card-item" onclick="speak('H. Horse')"><span class="emoji-huge">🐴</span><div class="word-en">Horse</div></div>
+                    <div class="card-item" onclick="speak('H. Hat')"><span class="emoji-huge">🧢</span><div class="word-en">Hat</div></div>
+                    <div class="card-item" onclick="speak('I. Ice cream')"><span class="emoji-huge">🍦</span><div class="word-en">Ice cream</div></div>
+                    <div class="card-item" onclick="speak('J. Juice')"><span class="emoji-huge">🧃</span><div class="word-en">Juice</div></div>
+                    <div class="card-item" onclick="speak('J. Jelly')"><span class="emoji-huge">🍮</span><div class="word-en">Jelly</div></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="phonics" class="content-section">
-        <h3>Letters Hh, Ii, Jj</h3>
-        
-        <div class="letter-row" onclick="speak('H. Horse. House. Hat.')">
-            <div class="big-letter">Hh</div>
-            <div>
-                <div style="font-family:'Fredoka'; font-size:1.2rem;">Horse 🐴 | Hat 🧢</div>
-            </div>
-        </div>
-
-        <div class="letter-row" onclick="speak('I. Ice cream. Ink.')">
-            <div class="big-letter">Ii</div>
-            <div>
-                <div style="font-family:'Fredoka'; font-size:1.2rem;">Ice-cream 🍦 | Ink ✒️</div>
-            </div>
-        </div>
-        
-        <div class="letter-row" onclick="speak('J. Jelly. Juice. Jumper.')">
-            <div class="big-letter">Jj</div>
-            <div>
-                <div style="font-family:'Fredoka'; font-size:1.2rem;">Jelly 🍮 | Juice 🧃</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="quiz" class="content-section">
-        <h3>اختبر معلوماتك 🌟</h3>
-        
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">1. ما معنى "Shoes"؟</div>
-            <button class="quiz-opt" onclick="check(this, false)">قميص</button>
-            <button class="quiz-opt" onclick="check(this, true)">حذاء</button>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">2. الفيل (Elephant) هو:</div>
-            <button class="quiz-opt" onclick="check(this, true)">Big (كبير)</button>
-            <button class="quiz-opt" onclick="check(this, false)">Small (صغير)</button>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-            <div class="quiz-question">3. I am wearing a red ........ (قميص)</div>
-            <button class="quiz-opt" onclick="check(this, true)">Shirt</button>
-            <button class="quiz-opt" onclick="check(this, false)">Skirt</button>
-        </div>
-    </div>
-
-    <div id="toast" class="speak-hint">🔊 جاري النطق...</div>
-
+    <div id="toast" class="toast">🔊 جاري النطق...</div>
     <script>
-        function openTab(id) {
-            document.querySelectorAll('.content-section').forEach(e => e.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            
-            const map = {'clothes':0, 'sizes':1, 'phonics':2, 'quiz':3};
-            document.querySelectorAll('.tab-btn')[map[id]].classList.add('active');
-        }
-
-        let currentUtterance = null;
+        function openBook(type) { document.getElementById('menu-view').classList.remove('active'); document.getElementById(type+'-view').classList.add('active'); window.scrollTo(0,0); }
+        function goBack() { document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active')); document.getElementById('menu-view').classList.add('active'); window.scrollTo(0,0); }
         function speak(text) {
-            const toast = document.getElementById('toast');
-            toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1500);
-            window.speechSynthesis.cancel();
-            currentUtterance = new SpeechSynthesisUtterance(text);
-            currentUtterance.lang = 'en-US';
-            currentUtterance.rate = 0.85;
-            let voices = window.speechSynthesis.getVoices();
-            let enVoice = voices.find(v => v.lang.includes('en'));
-            if(enVoice) currentUtterance.voice = enVoice;
-            window.speechSynthesis.speak(currentUtterance);
-        }
-        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-
-        function check(btn, isOk) {
-            if(isOk) { btn.classList.add('correct'); speak('Excellent!'); }
-            else { btn.classList.add('wrong'); speak('Try again'); }
+            const t = document.getElementById('toast'); t.style.opacity=1; setTimeout(()=>t.style.opacity=0, 1500);
+            window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85; window.speechSynthesis.speak(u);
         }
     </script>
 </body>
